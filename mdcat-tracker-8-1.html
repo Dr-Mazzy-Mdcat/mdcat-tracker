@@ -1,0 +1,2162 @@
+<!DOCTYPE html>
+<html lang="ur-Latn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>40 Days: Ilm + Ibadat + Discipline — MDCAT 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --bio:#1f9d6f; --bio-bg:#e6f7f0;
+    --chem:#6f4fd8; --chem-bg:#efe9fc;
+    --phy:#e0792e; --phy-bg:#fdf0e3;
+    --test:#d63a4e; --test-bg:#fde8ea;
+    --mock:#a3172f; --mock-bg:#fbe3e6;
+    --catch:#c9971f; --catch-bg:#fdf5e0;
+    --eng:#1c8fa6; --eng-bg:#e2f5f9;
+    --rev:#c23e8f; --rev-bg:#fbe6f2;
+    --ink:#1c2230; --paper:#fbf9f5;
+    --done:#1f9d6f;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);padding:0 0 70px;}
+
+  header{
+    background:linear-gradient(135deg,#1c2230 0%,#2f3a52 55%,#4a3a7a 100%);
+    color:#fff;padding:34px 20px 26px;text-align:center;position:relative;
+  }
+  header h1{font-family:'Fraunces',serif;font-weight:800;font-size:1.9rem;margin:0 0 4px;}
+  header .sub{color:#ffd27a;font-weight:600;font-size:0.95rem;}
+
+  .countdown-wrap{
+    max-width:1000px;margin:-30px auto 0;padding:0 16px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;position:relative;z-index:2;
+  }
+  .cbox{
+    background:#fff;border-radius:16px;padding:16px;text-align:center;
+    box-shadow:0 6px 18px rgba(28,34,48,0.12);border:2px solid transparent;
+  }
+  .cbox .num{font-family:'Fraunces',serif;font-weight:900;font-size:1.9rem;line-height:1;}
+  .cbox .lbl{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:#666;margin-top:4px;}
+  .cbox.exam{border-color:var(--test);} .cbox.exam .num{color:var(--test);}
+  .cbox.streak{border-color:var(--catch);} .cbox.streak .num{color:var(--catch);}
+  .cbox.done{border-color:var(--done);} .cbox.done .num{color:var(--done);}
+  .cbox.marks{border-color:var(--chem);} .cbox.marks .num{color:var(--chem);}
+  .cbox.hours{border-color:var(--phy);} .cbox.hours .num{color:var(--phy);}
+
+  .container{max-width:1000px;margin:0 auto;padding:0 16px;}
+
+  .progress-outer{margin-top:22px;background:#fff;border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+  .progress-bar-track{background:#eee;border-radius:20px;height:14px;overflow:hidden;margin-top:8px;}
+  .progress-bar-fill{background:linear-gradient(90deg,var(--bio),var(--eng));height:100%;border-radius:20px;transition:width .4s ease;}
+  .subject-tally{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .subject-tally span{font-size:0.75rem;font-weight:700;padding:4px 11px;border-radius:20px;}
+
+  .legend{max-width:1000px;margin:18px auto 0;padding:0 16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+  .legend button{
+    display:inline-flex;align-items:center;gap:6px;font-size:0.76rem;font-weight:700;
+    padding:5px 12px;border-radius:20px;border:2px solid transparent;cursor:pointer;font-family:inherit;
+    opacity:0.55;transition:opacity .15s, border-color .15s;
+  }
+  .legend button.active{opacity:1;}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+  .week-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;margin:34px 0 4px;border-left:6px solid var(--ink);padding-left:12px;}
+  .week-sub{color:#666;font-size:0.82rem;margin:0 0 14px 18px;font-weight:500;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+
+  .card{border-radius:14px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,0.06);border:2px solid transparent;position:relative;transition:opacity .2s, transform .15s;}
+  .card.hidden{display:none;}
+  .card.today{outline:3px solid var(--ink);outline-offset:2px;}
+  .card.checked{opacity:0.6;}
+  .card .toprow{display:flex;justify-content:space-between;align-items:flex-start;}
+  .card .daynum{font-family:'Fraunces',serif;font-weight:800;font-size:1.3rem;line-height:1;}
+  .card .date{font-size:0.72rem;font-weight:600;opacity:0.75;margin-bottom:6px;}
+  .resched-tag{display:inline-block;font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:0.03em;color:#fff;background:var(--catch);padding:1px 6px;border-radius:8px;margin-left:4px;vertical-align:middle;}
+  .card .badge{display:inline-block;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;padding:2px 9px;border-radius:12px;margin-bottom:7px;}
+  .card .topics{font-size:0.85rem;line-height:1.4;font-weight:500;}
+  .card .extra{margin-top:7px;font-size:0.72rem;padding-top:7px;border-top:1px dashed rgba(0,0,0,0.15);opacity:0.85;}
+
+  .check-main{
+    width:24px;height:24px;border-radius:7px;border:2px solid rgba(0,0,0,0.25);
+    background:#fff;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    font-size:15px;color:#fff;font-weight:800;
+  }
+  .check-main.on{background:var(--done);border-color:var(--done);}
+
+  .habits{display:flex;gap:10px;margin-top:9px;flex-wrap:wrap;}
+  .habit-chip{
+    font-size:0.68rem;font-weight:700;padding:4px 9px;border-radius:16px;cursor:pointer;
+    border:1.5px solid rgba(0,0,0,0.15);background:rgba(255,255,255,0.6);color:#555;
+    display:inline-flex;align-items:center;gap:5px;user-select:none;
+  }
+  .habit-chip.on{background:var(--ink);border-color:var(--ink);color:#fff;}
+
+  .bio{background:var(--bio-bg);border-color:var(--bio);} .bio .badge{background:var(--bio);color:#fff;} .bio .daynum{color:var(--bio);}
+  .chem{background:var(--chem-bg);border-color:var(--chem);} .chem .badge{background:var(--chem);color:#fff;} .chem .daynum{color:var(--chem);}
+  .phy{background:var(--phy-bg);border-color:var(--phy);} .phy .badge{background:var(--phy);color:#fff;} .phy .daynum{color:var(--phy);}
+  .test{background:var(--test-bg);border-color:var(--test);} .test .badge{background:var(--test);color:#fff;} .test .daynum{color:var(--test);}
+  .mock{background:var(--mock-bg);border-color:var(--mock);} .mock .badge{background:var(--mock);color:#fff;} .mock .daynum{color:var(--mock);}
+  .catch{background:var(--catch-bg);border-color:var(--catch);} .catch .badge{background:var(--catch);color:#fff;} .catch .daynum{color:var(--catch);}
+  .eng{background:var(--eng-bg);border-color:var(--eng);} .eng .badge{background:var(--eng);color:#fff;} .eng .daynum{color:var(--eng);}
+  .rev{background:var(--rev-bg);border-color:var(--rev);} .rev .badge{background:var(--rev);color:#fff;} .rev .daynum{color:var(--rev);}
+
+  .milestones{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;}
+  .milestones .box{flex:1;min-width:220px;border-radius:14px;padding:18px;text-align:center;color:#fff;font-weight:700;font-family:'Fraunces',serif;font-size:1.05rem;}
+  .milestones .rest{background:linear-gradient(135deg,#1c8fa6,#0d5c6c);}
+  .milestones .examday{background:linear-gradient(135deg,#d63a4e,#8f1c2c);}
+
+  .dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px;}
+  .dash-panel{background:#fff;border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:4px solid var(--panel-color,var(--ink));}
+  .dash-panel h3{margin:0 0 12px;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;}
+  .dash-row{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;font-size:0.85rem;}
+  .dash-row .k{color:#666;font-weight:500;}
+  .dash-row .v{font-weight:800;font-size:1.05rem;}
+  .dash-row.accent .v{color:var(--panel-color);}
+  .dash-row.big{border-top:1px dashed rgba(0,0,0,0.12);margin-top:6px;padding-top:8px;}
+
+  .card .stats{margin-top:9px;padding-top:9px;border-top:1px dashed rgba(0,0,0,0.15);}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:6px;}
+  .stat-field{display:flex;flex-direction:column;gap:2px;}
+  .stat-field label{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.02em;color:#777;}
+  .stat-field input{
+    width:100%;border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;padding:3px 5px;
+    font-size:0.78rem;font-family:inherit;font-weight:600;background:rgba(255,255,255,0.75);
+  }
+  .stat-field input:focus{outline:2px solid var(--ink);border-color:var(--ink);}
+  .day-accuracy{font-size:0.68rem;font-weight:700;color:#555;}
+
+  .timer-row{display:flex;align-items:center;gap:10px;margin-top:9px;}
+  .timer-btn{
+    border:none;border-radius:20px;padding:7px 14px;font-size:0.75rem;font-weight:700;cursor:pointer;
+    font-family:inherit;background:var(--ink);color:#fff;display:inline-flex;align-items:center;gap:5px;
+  }
+  .timer-btn.running{background:var(--test);animation:pulse 1.6s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.75;}}
+  .timer-display{font-family:'Fraunces',serif;font-weight:800;font-size:0.9rem;font-variant-numeric:tabular-nums;}
+
+  .chapter-table input{
+    width:60px;border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;padding:3px 5px;
+    font-size:0.8rem;font-family:inherit;font-weight:600;text-align:center;
+  }
+  .chapter-table input:focus{outline:2px solid var(--ink);border-color:var(--ink);}
+
+  .chapter-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:10px;}
+  .chapter-table th{text-align:left;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.03em;color:#777;padding:6px 8px;border-bottom:2px solid #eee;}
+  .chapter-table td{padding:7px 8px;border-bottom:1px solid #f0f0f0;}
+  .chapter-table tr:hover td{background:#faf9f6;}
+  .chapter-table .badge{font-size:0.6rem;padding:2px 7px;}
+
+  .timelog-toggle{
+    margin-top:9px;background:none;border:1.5px dashed rgba(0,0,0,0.2);border-radius:8px;width:100%;
+    padding:5px;font-size:0.68rem;font-weight:700;color:#666;cursor:pointer;font-family:inherit;
+  }
+  .timelog-toggle:hover{border-color:var(--ink);color:var(--ink);}
+  .timelog{margin-top:8px;display:none;}
+  .timelog.open{display:block;}
+  .timelog-block{margin-top:8px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.6);border:1px solid rgba(0,0,0,0.1);}
+  .timelog-block .tb-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+  .timelog-block .tb-time{font-size:0.68rem;font-weight:800;}
+  .timelog-block .tb-target{font-size:0.6rem;color:#888;}
+  .timelog-row{display:flex;gap:6px;margin-bottom:5px;}
+  .timelog-row input{border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;padding:3px 5px;font-size:0.72rem;font-family:inherit;font-weight:600;}
+  .timelog-hours{width:46px;text-align:center;}
+  .timelog-book{flex:1;min-width:0;}
+  .timelog-tags{display:flex;flex-wrap:wrap;gap:4px;}
+  .timelog-tag{font-size:0.58rem;font-weight:700;padding:2px 7px;border-radius:10px;cursor:pointer;border:1.5px solid rgba(0,0,0,0.15);background:rgba(255,255,255,0.7);color:#666;user-select:none;}
+  .timelog-tag.on{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .timelog-subtotal{font-size:0.65rem;font-weight:700;color:#555;margin-top:6px;text-align:right;}
+
+  /* Quote / fact banner */
+  .inspire-wrap{margin-top:22px;display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:640px){.inspire-wrap{grid-template-columns:1fr 1fr;}}
+  .inspire-card{border-radius:14px;padding:16px 18px;color:#fff;box-shadow:0 4px 14px rgba(0,0,0,0.1);}
+  .inspire-card .tag{font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;opacity:0.85;}
+  .inspire-card .txt{font-family:'Fraunces',serif;font-weight:700;font-size:1rem;margin-top:6px;line-height:1.4;}
+  .inspire-card.quote{background:linear-gradient(135deg,#1c8fa6,#0d5c6c);}
+  .inspire-card.fact{background:linear-gradient(135deg,#c9971f,#8a660f);}
+
+  /* Milestone banner */
+  .milestone-banner{margin-top:16px;background:linear-gradient(135deg,#c23e8f,#7a1f5c);color:#fff;border-radius:14px;padding:14px 18px;text-align:center;font-family:'Fraunces',serif;font-weight:800;font-size:1rem;display:none;}
+  .milestone-banner.show{display:block;}
+
+  /* Mood + sleep/water */
+  .extras-row{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap;}
+  .mood-group{display:flex;gap:5px;}
+  .mood-btn{border:1.5px solid rgba(0,0,0,0.15);background:rgba(255,255,255,0.6);border-radius:8px;padding:3px 7px;font-size:0.9rem;cursor:pointer;}
+  .mood-btn.on{border-color:var(--ink);background:var(--ink);}
+  .mini-field{display:flex;align-items:center;gap:4px;font-size:0.65rem;font-weight:700;color:#666;}
+  .mini-field input{width:38px;border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;padding:2px 4px;font-size:0.72rem;font-family:inherit;text-align:center;}
+  .water-dots{display:flex;gap:3px;}
+  .water-dot{width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(28,143,166,0.5);cursor:pointer;background:#fff;}
+  .water-dot.on{background:#1c8fa6;border-color:#1c8fa6;}
+
+  /* Weekly reflection */
+  .reflection-box{margin-top:12px;background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:4px solid var(--catch);}
+  .reflection-box h4{margin:0 0 8px;font-family:'Fraunces',serif;font-size:0.9rem;}
+  .reflection-box textarea{width:100%;min-height:60px;border:1.5px solid rgba(0,0,0,0.15);border-radius:8px;padding:8px;font-family:inherit;font-size:0.8rem;resize:vertical;}
+
+  /* Weak topics + chart */
+  .weak-list{list-style:none;padding:0;margin:0;max-height:220px;overflow-y:auto;}
+  .weak-list li{font-size:0.78rem;padding:6px 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;gap:8px;}
+  .weak-list .wl-book{color:#666;font-size:0.7rem;}
+  .weak-empty{font-size:0.78rem;color:#999;padding:8px 0;}
+  .chart-svg{width:100%;height:140px;}
+
+  /* Live exam clock */
+  .exam-clock{font-size:0.7rem;font-weight:700;color:var(--test);margin-top:4px;font-variant-numeric:tabular-nums;}
+
+  /* Pie chart */
+  .pie-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .pie{width:120px;height:120px;border-radius:50%;flex-shrink:0;}
+  .pie-legend{flex:1;min-width:140px;}
+  .pie-legend-row{display:flex;justify-content:space-between;font-size:0.75rem;padding:2px 0;}
+  .pie-legend-row .dot{margin-right:5px;}
+
+  /* Block timer */
+  .block-timer-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+  .block-timer-btn{border:none;border-radius:12px;padding:3px 9px;font-size:0.62rem;font-weight:700;cursor:pointer;font-family:inherit;background:var(--ink);color:#fff;}
+  .block-timer-btn.running{background:var(--test);animation:pulse 1.6s infinite;}
+  .block-timer-display{font-size:0.65rem;font-weight:700;font-variant-numeric:tabular-nums;color:#666;}
+
+  /* Mock test log */
+  .mock-form{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .mock-form input{border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;padding:5px 7px;font-size:0.78rem;font-family:inherit;}
+  .mock-form input[type="date"]{flex:1 1 130px;}
+  .mock-form input[type="number"]{width:70px;}
+  .mock-form input[type="text"]{flex:2 1 140px;}
+  .mock-form button{background:var(--ink);color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;}
+  .mock-list{list-style:none;padding:0;margin:0;max-height:220px;overflow-y:auto;}
+  .mock-list li{display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;padding:6px 0;border-bottom:1px solid #f0f0f0;gap:8px;}
+  .mock-list .ml-del{border:none;background:none;color:#bbb;cursor:pointer;font-size:0.75rem;}
+  .mock-list .ml-del:hover{color:var(--test);}
+  .mock-avg{font-size:0.72rem;font-weight:700;color:#555;margin-top:8px;text-align:right;}
+
+  /* Error/mistake log */
+  .mistake-form{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .mistake-form select{border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;padding:5px 7px;font-size:0.78rem;font-family:inherit;flex:1 1 110px;}
+  .mistake-form input[type="text"]{border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;padding:5px 7px;font-size:0.78rem;font-family:inherit;flex:3 1 200px;}
+  .mistake-form button{background:var(--ink);color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;}
+  .mistake-list{list-style:none;padding:0;margin:0;max-height:280px;overflow-y:auto;}
+  .mistake-list li{display:flex;align-items:flex-start;gap:8px;font-size:0.78rem;padding:8px 0;border-bottom:1px solid #f0f0f0;}
+  .mistake-list li.fixed .mi-note{text-decoration:line-through;opacity:0.5;}
+  .mi-check{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid rgba(0,0,0,0.2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.7rem;margin-top:1px;}
+  .mi-check.on{background:var(--done);border-color:var(--done);color:#fff;}
+  .mi-body{flex:1;min-width:0;}
+  .mi-meta{display:flex;gap:6px;align-items:center;margin-bottom:2px;}
+  .mi-subj{font-size:0.65rem;font-weight:800;padding:1px 7px;border-radius:8px;color:#fff;}
+  .mi-date{font-size:0.65rem;color:#999;}
+  .mi-note{font-size:0.8rem;}
+  .mistake-list .ml-del{border:none;background:none;color:#bbb;cursor:pointer;font-size:0.75rem;flex:0 0 auto;}
+  .mistake-list .ml-del:hover{color:var(--test);}
+  .mistake-empty{font-size:0.72rem;color:#999;font-style:italic;}
+
+  /* AI Doubt Solver */
+  .doubt-sub{font-size:0.78rem;color:#777;margin-bottom:10px;}
+  .doubt-form{display:flex;flex-direction:column;gap:8px;}
+  .doubt-form select{border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;padding:6px 8px;font-size:0.8rem;font-family:inherit;align-self:flex-start;}
+  .doubt-form textarea{width:100%;border:1.5px solid rgba(0,0,0,0.15);border-radius:8px;padding:9px 10px;font-size:0.85rem;font-family:inherit;resize:vertical;}
+  .doubt-form button{align-self:flex-end;background:var(--test);color:#fff;border:none;border-radius:20px;padding:8px 20px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:inherit;}
+  .doubt-form button:disabled{opacity:0.6;cursor:default;}
+  .doubt-answer{margin-top:12px;}
+  .doubt-answer:empty{margin-top:0;}
+  .doubt-answer-box{background:rgba(163,23,47,0.05);border-left:3px solid var(--test);border-radius:0 8px 8px 0;padding:12px 14px;font-size:0.85rem;line-height:1.55;white-space:pre-wrap;}
+  .doubt-loading{font-size:0.8rem;color:#999;font-style:italic;}
+  .doubt-error{font-size:0.8rem;color:var(--test);}
+
+  /* Badges */
+  .badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:6px;}
+  .badge-chip{border-radius:12px;padding:10px 6px;text-align:center;background:#f2f0eb;border:2px solid transparent;opacity:0.4;}
+  .badge-chip.earned{opacity:1;background:linear-gradient(135deg,#fff6df,#fdeec2);border-color:var(--catch);}
+  .badge-chip .bi{font-size:1.5rem;}
+  .badge-chip .bl{font-size:0.62rem;font-weight:700;margin-top:4px;line-height:1.25;}
+
+  /* Backup/restore */
+  .backup-row{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
+  .backup-row button, .backup-row label{
+    background:none;border:1.5px solid rgba(0,0,0,0.2);color:#666;font-size:0.78rem;font-weight:600;
+    padding:8px 18px;border-radius:20px;cursor:pointer;font-family:inherit;display:inline-block;
+  }
+  .backup-row button:hover, .backup-row label:hover{border-color:var(--ink);color:var(--ink);}
+  .backup-row input[type="file"]{display:none;}
+
+  /* Spiritual routine panel */
+  .deen-wrap{margin-top:16px;display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:640px){.deen-wrap{grid-template-columns:repeat(3,1fr);}}
+  .deen-card{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:4px solid var(--eng);}
+  .deen-card h4{margin:0 0 8px;font-family:'Fraunces',serif;font-size:0.88rem;}
+  .deen-card .arabic{font-size:1.05rem;text-align:right;line-height:1.9;margin:6px 0;direction:rtl;}
+  .deen-card .translit{font-size:0.75rem;font-style:italic;color:#555;}
+  .deen-card .translate{font-size:0.75rem;color:#777;margin-top:4px;}
+  .deen-card ul{margin:6px 0 0;padding-left:18px;font-size:0.78rem;color:#444;}
+  .deen-card li{margin-bottom:3px;}
+
+  /* Ayat for every mood */
+  .ayat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:6px;}
+  .ayat-card{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 2px 6px rgba(0,0,0,0.05);border-left:4px solid var(--eng);text-decoration:none;display:block;color:inherit;}
+  .ayat-card .am{font-weight:800;font-size:0.8rem;}
+  .ayat-card .ar{font-size:0.72rem;color:#666;margin-top:2px;}
+  .ayat-card .al{font-size:0.65rem;color:var(--eng);margin-top:4px;font-weight:700;}
+
+  /* Per-day namaz + Quran checklist */
+  .deen-row{margin-top:9px;padding-top:9px;border-top:1px dashed rgba(0,0,0,0.15);}
+  .deen-row-label{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.02em;color:#777;margin-bottom:4px;}
+  .prayer-chips{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px;}
+  .prayer-chip{font-size:0.62rem;font-weight:700;padding:3px 7px;border-radius:10px;cursor:pointer;border:1.5px solid rgba(0,0,0,0.15);background:rgba(255,255,255,0.6);color:#666;user-select:none;}
+  .prayer-chip.on{background:var(--eng);border-color:var(--eng);color:#fff;}
+  .quran-chip{font-size:0.66rem;font-weight:700;padding:3px 9px;border-radius:10px;cursor:pointer;border:1.5px solid rgba(0,0,0,0.15);background:rgba(255,255,255,0.6);color:#666;user-select:none;display:inline-block;}
+  .quran-chip.on{background:var(--catch);border-color:var(--catch);color:#fff;}
+
+  /* Subject completion bars */
+  .subj-bar-row{margin-bottom:10px;}
+  .subj-bar-head{display:flex;justify-content:space-between;font-size:0.78rem;font-weight:700;margin-bottom:4px;}
+  .subj-bar-track{background:#eee;border-radius:10px;height:9px;overflow:hidden;}
+  .subj-bar-fill{height:100%;border-radius:10px;}
+
+  /* Subject accuracy tracker */
+  .subj-acc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+  .subj-acc-card{border-radius:12px;padding:12px 14px;background:rgba(0,0,0,0.02);border:1.5px solid rgba(0,0,0,0.06);}
+  .subj-acc-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+  .subj-acc-head .sn{font-weight:800;font-size:0.85rem;}
+  .subj-acc-head .sp{font-family:'Fraunces',serif;font-weight:900;font-size:1.4rem;}
+  .subj-acc-sub{font-size:0.7rem;color:#777;margin-bottom:8px;}
+  .subj-acc-log{display:flex;gap:6px;align-items:center;margin-top:8px;}
+  .subj-acc-log input{
+    width:100%;border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;padding:5px 6px;
+    font-size:0.78rem;font-family:inherit;font-weight:600;text-align:center;
+  }
+  .subj-acc-log button{
+    border:none;border-radius:6px;padding:6px 10px;font-size:0.75rem;font-weight:700;
+    color:#fff;cursor:pointer;white-space:nowrap;font-family:inherit;
+  }
+  .subj-acc-empty{font-size:0.72rem;color:#999;font-style:italic;}
+
+  /* Mini calendar overview */
+  .mini-cal{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;}
+  @media(max-width:480px){.mini-cal{grid-template-columns:repeat(8,1fr);}}
+  .mini-cal-cell{aspect-ratio:1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:0.58rem;font-weight:700;color:#fff;opacity:0.35;}
+  .mini-cal-cell.done{opacity:1;}
+  .mini-cal-cell.today{outline:2px solid var(--ink);outline-offset:1px;}
+
+  /* Share progress */
+  .share-box textarea{width:100%;min-height:110px;border:1.5px solid rgba(0,0,0,0.15);border-radius:8px;padding:10px;font-family:inherit;font-size:0.78rem;resize:vertical;margin-bottom:8px;}
+  .share-box button{background:var(--ink);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;}
+
+  /* Syllabus coverage */
+  .syl-subject{margin-bottom:14px;}
+  .syl-subject-head{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:0.85rem;margin-bottom:6px;padding-bottom:4px;border-bottom:2px solid #eee;}
+  .syl-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:0.8rem;}
+  .syl-check{width:18px;height:18px;border-radius:5px;border:2px solid rgba(0,0,0,0.25);background:#fff;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:800;}
+  .syl-check.on{background:var(--done);border-color:var(--done);}
+  .syl-item.on-text{color:#999;text-decoration:line-through;}
+
+  /* Print report (hidden on screen) */
+  #printReport{display:none;}
+  @media print{
+    header .sub, .countdown-wrap, .inspire-wrap, .deen-wrap, .milestone-banner,
+    .legend, .backup-row, #resetBtn, .timelog-toggle, .timelog, .timer-row,
+    .mood-group, .mini-field, .check-main, .card .stats input, .reflection-box textarea,
+    .dash, .savenote, .prayer-chips, .quran-chip, .print-btn { display:none !important; }
+    #printReport{display:block !important;}
+    body{padding:0;}
+    .grid{display:block;}
+    .card{page-break-inside:avoid;}
+  }
+
+  .resetbar{max-width:1000px;margin:30px auto 0;padding:0 16px;text-align:center;}
+  @media print{ .vocab-section, .grammar-section{ display:none !important; } }
+
+  /* Vocabulary section */
+  .vocab-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;}
+  .vocab-header select{border:1.5px solid rgba(0,0,0,0.15);border-radius:8px;padding:6px 10px;font-family:inherit;font-size:0.85rem;font-weight:600;}
+  .vocab-progress{font-size:0.78rem;font-weight:700;color:#555;}
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;}
+  .vocab-card{background:#fff;border-radius:10px;padding:10px 12px;box-shadow:0 2px 6px rgba(0,0,0,0.05);border-left:4px solid var(--eng);}
+  .vocab-card.learned{opacity:0.55;}
+  .vocab-card .vw{font-family:'Fraunces',serif;font-weight:800;font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;}
+  .vocab-card .vm{font-size:0.78rem;color:#444;margin-top:3px;}
+  .vocab-card .vs{font-size:0.7rem;color:#666;margin-top:4px;}
+  .vocab-card .ve{font-size:0.7rem;color:#888;font-style:italic;margin-top:4px;}
+  .vocab-check{width:18px;height:18px;border-radius:5px;border:2px solid rgba(0,0,0,0.25);background:#fff;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:800;}
+  .vocab-check.on{background:var(--eng);border-color:var(--eng);}
+  .vocab-empty{font-size:0.82rem;color:#888;padding:20px;text-align:center;}
+
+  /* Grammar section */
+  .grammar-topic{background:#fff;border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,0.05);border-left:4px solid var(--chem);}
+  .grammar-topic-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+  .grammar-topic-head h4{margin:0;font-family:'Fraunces',serif;font-size:0.95rem;}
+  .grammar-note{font-size:0.8rem;color:#555;margin:8px 0;line-height:1.5;}
+  .grammar-body{display:none;margin-top:8px;}
+  .grammar-body.open{display:block;}
+  .grammar-ex{font-size:0.8rem;padding:6px 0;border-top:1px dashed rgba(0,0,0,0.1);}
+  .grammar-ex .ans{color:var(--done);font-weight:700;display:none;margin-top:3px;}
+  .grammar-ex .ans.shown{display:block;}
+  .grammar-ex button{font-size:0.65rem;font-weight:700;border:none;background:var(--ink);color:#fff;border-radius:10px;padding:2px 8px;cursor:pointer;margin-top:3px;}
+  .grammar-review-chip{font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:10px;border:1.5px solid rgba(0,0,0,0.15);cursor:pointer;color:#777;}
+  .grammar-review-chip.on{background:var(--done);border-color:var(--done);color:#fff;}
+  .resetbar button{
+    background:none;border:1.5px solid rgba(0,0,0,0.2);color:#666;font-size:0.78rem;font-weight:600;
+    padding:8px 18px;border-radius:20px;cursor:pointer;font-family:inherit;
+  }
+  .resetbar button:hover{border-color:var(--test);color:var(--test);}
+  .savenote{font-size:0.72rem;color:#999;margin-top:8px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>40 Days: Ilm + Ibadat + Discipline</h1>
+  <div class="sub">MDCAT 2026 Challenge · 11 August – 19 September · Meer Mazhar Ali Khan · 0346-1979432</div>
+</header>
+
+<div class="countdown-wrap">
+  <div class="cbox exam"><div class="num" id="daysLeft">—</div><div class="lbl">Days to Exam</div><div class="exam-clock" id="examClock"></div></div>
+  <div class="cbox done"><div class="num" id="daysDone">0/40</div><div class="lbl">Days Completed</div></div>
+  <div class="cbox streak"><div class="num" id="streak">0</div><div class="lbl">Current Streak</div></div>
+  <div class="cbox streak" style="border-color:var(--mock);"><div class="num" id="bestStreak" style="color:var(--mock);">0</div><div class="lbl">Best Streak</div></div>
+  <div class="cbox hours"><div class="num" id="hoursLeft">—</div><div class="lbl">Study Hrs Left</div></div>
+  <div class="cbox marks"><div class="num">152→173</div><div class="lbl">Target (+21)</div></div>
+  <div class="cbox streak" style="border-color:var(--eng);"><div class="num" id="fajrStreak" style="color:var(--eng);">0</div><div class="lbl">Fajr Streak</div></div>
+</div>
+
+<div class="container">
+  <div class="milestone-banner" id="milestoneBanner"></div>
+  <div class="inspire-wrap">
+    <div class="inspire-card quote"><div class="tag">Today's motivation</div><div class="txt" id="quoteText"></div></div>
+    <div class="inspire-card fact"><div class="tag">Fact of the day</div><div class="txt" id="factText"></div></div>
+  </div>
+
+  <div class="deen-wrap">
+    <div class="deen-card">
+      <h4>🌙 After Fajr</h4>
+      <ul>
+        <li>Astaghfirullah — 100×</li>
+        <li>Durood Shareef — 10–100×</li>
+      </ul>
+      <div class="arabic">رَبِّ زِدْنِي عِلْمًا</div>
+      <div class="translit">Rabbi zidni ilma</div>
+      <div class="translate">"My Lord, increase me in knowledge." — Qur'an 20:114</div>
+    </div>
+    <div class="deen-card">
+      <h4>📚 Starting study</h4>
+      <div class="arabic">بِسْمِ اللّٰهِ</div>
+      <div class="translit">Bismillah</div>
+      <div class="arabic">رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي</div>
+      <div class="translit">Rabbi ishrah li sadri, wa yassir li amri</div>
+      <div class="translate">"My Lord, open my chest and ease my task for me."</div>
+    </div>
+    <div class="deen-card">
+      <h4>🤲 Before sleep</h4>
+      <ul>
+        <li>Ayat-ul-Kursi</li>
+        <li>3 Quls — Ikhlas, Falaq, Naas</li>
+      </ul>
+      <div class="translate">Then a du'a in your own words: for barakah in effort, beneficial knowledge, and ease in MDCAT success.</div>
+    </div>
+  </div>
+
+  <div class="dash-panel" style="margin-top:16px;--panel-color:#1c8fa6">
+    <h3>🆘 Ayat for Every Mood</h3>
+    <div class="hint" style="font-size:0.72rem;color:#888;margin-bottom:4px;">Tap a card to read the full ayah and translation on Quran.com</div>
+    <div class="ayat-grid">
+      <a class="ayat-card" href="https://quran.com/3/159" target="_blank" rel="noopener"><div class="am">😔 Upset</div><div class="ar">Qur'an 3:159</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/4/28" target="_blank" rel="noopener"><div class="am">😩 Weak</div><div class="ar">Qur'an 4:28</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/20/46" target="_blank" rel="noopener"><div class="am">😞 Lonely</div><div class="ar">Qur'an 20:46</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/2/45" target="_blank" rel="noopener"><div class="am">😟 Worried</div><div class="ar">Qur'an 2:45</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/8/30" target="_blank" rel="noopener"><div class="am">😰 Anxious</div><div class="ar">Qur'an 8:30</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/3/139" target="_blank" rel="noopener"><div class="am">🙁 Unhappy</div><div class="ar">Qur'an 3:139</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/3/54" target="_blank" rel="noopener"><div class="am">⚠️ In danger</div><div class="ar">Qur'an 3:54</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/3/139" target="_blank" rel="noopener"><div class="am">😢 Depressed</div><div class="ar">Qur'an 3:139</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/13/28" target="_blank" rel="noopener"><div class="am">🕯️ Lack of faith</div><div class="ar">Qur'an 13:28</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/55/60" target="_blank" rel="noopener"><div class="am">💪 Need courage</div><div class="ar">Qur'an 55:60</div><div class="al">Read →</div></a>
+      <a class="ayat-card" href="https://quran.com/6/71" target="_blank" rel="noopener"><div class="am">🧭 Need direction</div><div class="ar">Qur'an 6:71</div><div class="al">Read →</div></a>
+    </div>
+  </div>
+
+  <div class="progress-outer">
+    <div style="display:flex;justify-content:space-between;font-size:0.85rem;font-weight:700;">
+      <span>Overall Plan Progress</span><span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="subject-tally" id="subjectTally"></div>
+  </div>
+
+  <div class="dash-panel" style="margin-top:14px;--panel-color:#1c8fa6">
+    <h3>🗓️ 40-Day Overview</h3>
+    <div class="mini-cal" id="miniCal"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="dash-panel" style="--panel-color:#a3172f" id="doubtPanel">
+    <h3>🤖 AI Doubt Solver</h3>
+    <div class="doubt-sub">Stuck on an MCQ or concept? Ask here — get an exam-style explanation instantly.</div>
+    <div class="doubt-form">
+      <select id="doubtSubject">
+        <option value="">General / Mixed</option>
+        <option value="bio">Biology</option>
+        <option value="chem">Chemistry</option>
+        <option value="phy">Physics</option>
+        <option value="eng">English/Logical</option>
+      </select>
+      <textarea id="doubtInput" placeholder="Paste the MCQ or describe the concept you're stuck on..." rows="3"></textarea>
+      <button id="doubtAskBtn">Ask</button>
+    </div>
+    <div id="doubtAnswer" class="doubt-answer"></div>
+  </div>
+
+  <div class="dash">
+    <div class="dash-panel" style="--panel-color:#1c8fa6" id="mcqPanel"><h3>📝 MCQs Accuracy</h3></div>
+    <div class="dash-panel" style="--panel-color:#c9971f" id="hoursPanel"><h3>⏱️ Study Hours</h3></div>
+    <div class="dash-panel" style="--panel-color:#c23e8f" id="mistakesPanel"><h3>🧩 Mistakes</h3></div>
+  </div>
+
+  <div class="dash">
+    <div class="dash-panel" style="--panel-color:#6f4fd8" id="subjAccPanel"><h3>🎯 Subject Accuracy</h3></div>
+  </div>
+
+  <div class="dash">
+    <div class="dash-panel" style="margin-top:14px;--panel-color:#d63a4e" id="chartPanel"><h3>📈 Accuracy Trend</h3></div>
+    <div class="dash-panel" style="margin-top:14px;--panel-color:#e0792e" id="weakPanel"><h3>🎯 Weak Topics</h3></div>
+  </div>
+
+  <div class="dash">
+    <div class="dash-panel" style="margin-top:14px;--panel-color:#1f9d6f" id="piePanel"><h3>🥧 Subject Time Split</h3></div>
+    <div class="dash-panel" style="margin-top:14px;--panel-color:#c9971f" id="badgesPanel"><h3>🏆 Badges</h3></div>
+  </div>
+
+  <div class="dash">
+    <div class="dash-panel" style="margin-top:14px;--panel-color:#6f4fd8" id="subjPctPanel"><h3>📊 Subject Completion</h3></div>
+    <div class="dash-panel share-box" style="margin-top:14px;--panel-color:#1c8fa6">
+      <h3>📤 Share Progress</h3>
+      <textarea id="shareText" readonly></textarea>
+      <button id="shareCopyBtn">Copy to clipboard</button>
+    </div>
+  </div>
+
+  <div class="dash-panel" style="margin-top:14px;--panel-color:#a3172f">
+    <h3>🧪 Mock Test Scores</h3>
+    <div class="mock-form">
+      <input type="date" id="mockDate">
+      <input type="number" id="mockScore" placeholder="Score" min="0">
+      <input type="number" id="mockTotal" placeholder="Total" min="1" value="200">
+      <input type="text" id="mockNote" placeholder="Note (optional)">
+      <button id="mockAddBtn">Add</button>
+    </div>
+    <ul class="mock-list" id="mockList"></ul>
+    <div class="mock-avg" id="mockAvg"></div>
+  </div>
+
+  <div class="dash-panel" style="margin-top:14px;--panel-color:#c23e8f">
+    <h3>🧩 Mistake / Error Log</h3>
+    <div class="mistake-form">
+      <select id="mistakeSubject">
+        <option value="bio">Biology</option>
+        <option value="chem">Chemistry</option>
+        <option value="phy">Physics</option>
+        <option value="eng">English/Logical</option>
+      </select>
+      <input type="text" id="mistakeNote" placeholder="What went wrong? (topic / question)">
+      <button id="mistakeAddBtn">Add</button>
+    </div>
+    <ul class="mistake-list" id="mistakeList"></ul>
+  </div>
+
+  <div class="dash-panel" style="margin-top:14px;--panel-color:#6f4fd8">
+    <h3>📚 Chapter-wise MCQs</h3>
+    <table class="chapter-table">
+      <thead><tr><th>Day</th><th>Chapter</th><th>Attempted</th><th>Correct</th><th>Accuracy</th></tr></thead>
+      <tbody id="chapterTableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="dash-panel" style="margin-top:14px;--panel-color:#e0792e">
+    <h3>✅ Syllabus Coverage <span id="syllabusOverallPct" style="font-size:0.75rem;color:#777;font-weight:600;"></span></h3>
+    <div id="syllabusList"></div>
+  </div>
+</div>
+
+<div class="legend" id="legend"></div>
+
+<div class="container" id="weeksContainer"></div>
+
+<div class="container">
+  <div class="week-title">📖 Vocabulary Builder</div>
+  <div class="week-sub">30 words a day · synonym, antonym, meaning, example — tap the box when you've learned one</div>
+  <div class="dash-panel vocab-section">
+    <div class="vocab-header">
+      <select id="vocabDaySelect"></select>
+      <span class="vocab-progress" id="vocabProgress"></span>
+    </div>
+    <div class="vocab-grid" id="vocabGrid"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="week-title">✍️ Grammar Practice</div>
+  <div class="week-sub">Core MDCAT English grammar topics with quick practice exercises</div>
+  <div class="grammar-section" id="grammarSection"></div>
+</div>
+
+<div class="container" id="printReportContainer">
+  <div id="printReport"></div>
+</div>
+
+<div class="container">
+  <div class="milestones">
+    <div class="box examday">🎯 20 September — Exam Day</div>
+  </div>
+</div>
+
+<div class="resetbar">
+  <div class="backup-row">
+    <button id="backupBtn">⬇ Backup progress</button>
+    <label for="restoreFile">⬆ Restore backup</label>
+    <input type="file" id="restoreFile" accept="application/json">
+    <button id="printBtn" class="print-btn">🖨 Print weekly report</button>
+    <button id="rescheduleBtn">⏩ Smart Reschedule</button>
+    <button id="cancelRescheduleBtn" style="display:none;">↩ Revert to Original Plan</button>
+  </div>
+  <button id="resetBtn">Reset all progress</button>
+  <div class="savenote">Progress saves automatically to this device — works fully offline too.</div>
+</div>
+
+<script>
+const SUBJECTS = {
+  bio:{label:'Biology', color:'var(--bio)'},
+  chem:{label:'Chemistry', color:'var(--chem)'},
+  phy:{label:'Physics', color:'var(--phy)'},
+  eng:{label:'English/Logical', color:'var(--eng)'},
+  catch:{label:'Catch-up', color:'var(--catch)'},
+  test:{label:'Academy Test', color:'var(--test)'},
+  mock:{label:'Mock/FLP', color:'var(--mock)'},
+  rev:{label:'Final Revision', color:'var(--rev)'}
+};
+
+const WEEKS = [
+  { title:'Week 1 — 2nd Year Biology', sub:'11 – 17 August', days:[
+    {n:1,date:'11 Aug (Tue)',type:'bio',topic:'Respiration + Support & Movement',extra:'Eng: Parts of Speech (1) · LR: Critical Thinking intro'},
+    {n:2,date:'12 Aug (Wed)',type:'bio',topic:'Homeostasis',extra:'Eng: Parts of Speech (2) · LR: Series Completion'},
+    {n:3,date:'13 Aug (Thu)',type:'bio',topic:'Evolution + Biotechnology',extra:'Eng: Tenses · LR: Deductions'},
+    {n:4,date:'14 Aug (Fri)',type:'bio',topic:'Reproduction + Nervous & Chemical Coordination',extra:'Eng: Articles & Prepositions · LR: Logical Problems'},
+    {n:5,date:'15 Aug (Sat)',type:'bio',topic:'Inheritance',extra:'Eng: Sentence Correction · LR: Course of Action'},
+    {n:6,date:'16 Aug (Sun)',type:'test',topic:'Biology — Full Week 1 (Respiration, Support & Movement, Homeostasis, Evolution, Biotechnology, Reproduction, Coordination, Inheritance)'},
+    {n:7,date:'17 Aug (Mon)',type:'catch',topic:'Week 1 ke weak areas / pending revision',extra:'Eng: Vocabulary (Synonyms) · LR: Cause & Effect'}
+  ]},
+  { title:'Week 2 — 2nd Year Chemistry', sub:'18 – 24 August', days:[
+    {n:8,date:'18 Aug (Tue)',type:'chem',topic:'Hydrocarbons (Alkanes, Alkenes, Alkynes, Benzene)',extra:'Eng: Vocabulary (Antonyms) · LR: Critical Thinking practice'},
+    {n:9,date:'19 Aug (Wed)',type:'chem',topic:'Alkyl Halides + Alcohols & Phenols',extra:'Eng: Analogies · LR: Series practice'},
+    {n:10,date:'20 Aug (Thu)',type:'chem',topic:'Aldehydes, Ketones, Carboxylic Acid',extra:'Eng: Reading Comprehension (1) · LR: Deductions practice'},
+    {n:11,date:'21 Aug (Fri)',type:'chem',topic:'S & P Block + Transition Elements',extra:'Eng: Reading Comprehension (2) · LR: Logical Problems practice'},
+    {n:12,date:'22 Aug (Sat)',type:'chem',topic:'Industrial Chemistry + Macromolecules + Organic Fundamentals + catch-up',extra:'Eng: Writing Skills (1) · LR: Course of Action practice'},
+    {n:13,date:'23 Aug (Sun)',type:'test',topic:'Chemistry — Full Week 2 + jo reh gaya woh cover',extra:'Eng: Writing Skills (2) · LR: Cause & Effect practice'},
+    {n:14,date:'24 Aug (Mon)',type:'eng',topic:'Dedicated consolidation — Full mock English + Logical Reasoning section'}
+  ]},
+  { title:'Week 3 — 2nd Year Physics', sub:'25 – 31 August', days:[
+    {n:15,date:'25 Aug (Tue)',type:'phy',topic:'Electrostatics'},
+    {n:16,date:'26 Aug (Wed)',type:'phy',topic:'Current Electricity'},
+    {n:17,date:'27 Aug (Thu)',type:'phy',topic:'Electromagnetism + Electromagnetic Induction'},
+    {n:18,date:'28 Aug (Fri)',type:'phy',topic:'AC + Electronics + Dawn of Modern Physics'},
+    {n:19,date:'29 Aug (Sat)',type:'phy',topic:'Atomic Spectra + Nuclear Physics'},
+    {n:20,date:'30 Aug (Sun)',type:'test',topic:'Physics — Full Week 3 + catch-up (No English today)'},
+    {n:21,date:'31 Aug (Mon)',type:'catch',topic:'Buffer day — agar Week 3 mein delay hua ho to yahan cover karo'}
+  ]},
+  { title:'Week 4 — 1st Year Revision', sub:'31 August – 7 September', days:[
+    {n:22,date:'01 Sep (Tue)',type:'bio',topic:'1st Yr: Acellular Life, Bioenergetics, Biological Molecules, Cell Structure & Function, Enzymes + NEW: Circulation, Digestion, Immunity'},
+    {n:23,date:'02 Sep (Wed)',type:'phy',topic:'1st Yr (Part 1): Vectors & Equilibrium, Force & Motion, Work & Energy'},
+    {n:24,date:'03 Sep (Thu)',type:'phy',topic:'1st Yr (Part 2): Rotational & Circular Motion, Fluid Dynamics, Waves, Thermodynamics'},
+    {n:25,date:'04 Sep (Fri)',type:'chem',topic:'1st Yr (Part 1): Stoichiometry, Atomic Structure, Gases, Liquids, Solids'},
+    {n:26,date:'05 Sep (Sat)',type:'chem',topic:'1st Yr (Part 2): Chemical Equilibrium, Reaction Kinetics, Thermochemistry, Electrochemistry, Chemical Bonding'},
+    {n:27,date:'06 Sep (Sun)',type:'eng',topic:'Full revision — English + Logical Reasoning (extra MCQs agar time bache)'},
+    {n:28,date:'07 Sep (Mon)',type:'mock',topic:'1st Year Mock Tests — 3 to 4 FLPs (back-to-back + review)'}
+  ]},
+  { title:'Week 5 — 2nd Year Revision', sub:'8 – 13 September', days:[
+    {n:29,date:'08 Sep (Tue)',type:'bio',topic:'2nd Year Biology — poori revision (sab 10 units, MCQ-focused)'},
+    {n:30,date:'09 Sep (Wed)',type:'chem',topic:'2nd Yr (Part 1): Transition Elements, Organic Fundamentals, Hydrocarbons, Alkyl Halides, Alcohols & Phenols'},
+    {n:31,date:'10 Sep (Thu)',type:'chem',topic:'2nd Yr (Part 2): Aldehydes/Ketones, Carboxylic Acids, S&P Block, Industrial, Macromolecules'},
+    {n:32,date:'11 Sep (Fri)',type:'phy',topic:'2nd Yr (Part 1): Electrostatics, Current Electricity, Electromagnetism, EM Induction'},
+    {n:33,date:'12 Sep (Sat)',type:'phy',topic:'2nd Yr (Part 2): AC, Electronics, Dawn of Modern Physics, Atomic Spectra, Nuclear Physics'},
+    {n:34,date:'13 Sep (Sun)',type:'mock',topic:'2nd Year Mock Tests — 3 to 4 FLPs (back-to-back + review)'}
+  ]},
+  { title:'Final Days — Revision Only', sub:'14 – 19 September', days:[
+    {n:35,date:'14 Sep (Mon)',type:'rev',topic:'Weak areas — Biology (based on mock mistakes)'},
+    {n:36,date:'15 Sep (Tue)',type:'rev',topic:'Weak areas — Chemistry'},
+    {n:37,date:'16 Sep (Wed)',type:'rev',topic:'Weak areas — Physics'},
+    {n:38,date:'17 Sep (Thu)',type:'rev',topic:'Ratta tables (Periodic table, formulas, constants) + MCQ practice'},
+    {n:39,date:'18 Sep (Fri)',type:'rev',topic:'Full syllabus quick MCQ practice — sab subjects mix'},
+    {n:40,date:'19 Sep (Sat)',type:'rev',topic:'Light revision only — notes/formula sheets, koi naya kaam nahi'}
+  ]}
+];
+
+const ALL_DAYS = WEEKS.flatMap(w => w.days);
+let state = {}; // { "day-N": {done:bool, mcq:bool, note:bool} }
+let activeFilter = null;
+
+// ---- Storage: uses Claude's window.storage when available (in-app),
+// falls back to localStorage so the file also works fully offline
+// when opened directly in a browser (e.g. downloaded to phone). ----
+const LS_PREFIX = 'mdcat-tracker::';
+function hasClaudeStorage(){ return typeof window.storage !== 'undefined' && window.storage; }
+const storageAPI = {
+  async get(key){
+    if (hasClaudeStorage()) { try { return await window.storage.get(key); } catch(e){} }
+    try {
+      const v = localStorage.getItem(LS_PREFIX + key);
+      return v !== null ? { key, value: v } : null;
+    } catch(e) { return null; }
+  },
+  async set(key, value){
+    if (hasClaudeStorage()) { try { return await window.storage.set(key, value); } catch(e){} }
+    try { localStorage.setItem(LS_PREFIX + key, value); return { key, value }; } catch(e) { return null; }
+  },
+  async list(prefix){
+    if (hasClaudeStorage()) { try { return await window.storage.list(prefix); } catch(e){} }
+    try {
+      const keys = [];
+      for (let i=0;i<localStorage.length;i++){
+        const k = localStorage.key(i);
+        if (k && k.startsWith(LS_PREFIX + (prefix||''))) keys.push(k.slice(LS_PREFIX.length));
+      }
+      return { keys };
+    } catch(e) { return { keys: [] }; }
+  }
+};
+
+const TIME_BLOCKS = [
+  {key:'morning', label:'Morning', time:'6:00 – 9:00', target:3},
+  {key:'afternoon', label:'Afternoon', time:'9:30 – 12:30', target:3},
+  {key:'evening', label:'Evening', time:'2:00 – 6:00', target:4},
+  {key:'night', label:'Night', time:'8:00 – 10:30', target:2.5}
+];
+const TIMELOG_TAGS = ['MCQs','Concept','Reading','Practice','Weak points'];
+
+function getBlock(n, blockKey){
+  const key = dayKey(n);
+  state[key] = state[key] || {};
+  state[key].blocks = state[key].blocks || {};
+  state[key].blocks[blockKey] = state[key].blocks[blockKey] || {hours:'', book:'', tags:[]};
+  return state[key].blocks[blockKey];
+}
+function updateBlockField(n, blockKey, field, value){
+  const b = getBlock(n, blockKey);
+  b[field] = value;
+  saveDay(n);
+  renderWeeks();
+}
+function toggleBlockTag(n, blockKey, tag){
+  const b = getBlock(n, blockKey);
+  const idx = b.tags.indexOf(tag);
+  if (idx >= 0) b.tags.splice(idx,1); else b.tags.push(tag);
+  saveDay(n);
+  render();
+}
+function toggleBlockTimer(n, blockKey){
+  const b = getBlock(n, blockKey);
+  if (b.timerStart) {
+    const elapsedHrs = (Date.now() - b.timerStart) / 3600000;
+    b.hours = Math.round(((parseFloat(b.hours) || 0) + elapsedHrs) * 100) / 100;
+    delete b.timerStart;
+  } else {
+    b.timerStart = Date.now();
+  }
+  saveDay(n);
+  render();
+}
+function blocksSubtotal(n){
+  const key = dayKey(n);
+  const blocks = (state[key] && state[key].blocks) || {};
+  return Object.values(blocks).reduce((s,b) => s + (parseFloat(b.hours) || 0), 0);
+}
+
+let openTimelogs = new Set();
+function toggleTimelogPanel(n){
+  if (openTimelogs.has(n)) openTimelogs.delete(n); else openTimelogs.add(n);
+  renderWeeks();
+}
+
+// ---- Mood / sleep / water ----
+function setMood(n, mood){
+  const key = dayKey(n);
+  state[key] = state[key] || {};
+  state[key].mood = state[key].mood === mood ? undefined : mood;
+  saveDay(n);
+  renderWeeks();
+}
+function updateExtra(n, field, value){
+  const key = dayKey(n);
+  state[key] = state[key] || {};
+  const num = value === '' ? undefined : Math.max(0, parseFloat(value));
+  state[key][field] = isNaN(num) ? undefined : num;
+  saveDay(n);
+  renderWeeks();
+}
+function setWater(n, count){
+  const key = dayKey(n);
+  state[key] = state[key] || {};
+  state[key].water = state[key].water === count ? count - 1 : count;
+  saveDay(n);
+  renderWeeks();
+}
+function togglePrayer(n, prayer){
+  const key = dayKey(n);
+  state[key] = state[key] || {};
+  state[key].prayers = state[key].prayers || {};
+  state[key].prayers[prayer] = !state[key].prayers[prayer];
+  saveDay(n);
+  renderWeeks();
+}
+function toggleQuranDua(n){
+  const key = dayKey(n);
+  state[key] = state[key] || {};
+  state[key].quranDua = !state[key].quranDua;
+  saveDay(n);
+  renderWeeks();
+}
+
+// ---- Weekly reflections ----
+let weekState = {}; // { "week-0": {reflection:""} }
+function weekKey(i){ return 'week-' + i; }
+async function saveWeekReflection(i, value){
+  weekState[weekKey(i)] = { reflection: value };
+  try { await storageAPI.set(weekKey(i), JSON.stringify(weekState[weekKey(i)])); } catch(e){}
+}
+
+// ---- Motivational quotes & facts ----
+const QUOTES = [
+  "Ek din ka sabar, kal ki kamiyabi ki neev hai.",
+  "Consistency beats intensity — show up every day, even tired.",
+  "Rabbi zidni ilma — 'My Lord, increase me in knowledge.' (20:114)",
+  "Small daily progress compounds into a seat in medical college.",
+  "Mushkil waqt guzar jata hai, mehnat ka asar reh jata hai.",
+  "You don't need a perfect day. You need a day you didn't quit.",
+  "Inna ma'al usri yusra — 'Indeed, with hardship comes ease.' (94:6)",
+  "Revise today what you'll thank yourself for on exam day.",
+  "Har MCQ jo galat hui, woh kal ki sahi ka rasta hai.",
+  "Discipline is choosing between what you want now and what you want most.",
+  "Allahumma yassir wala tu'assir — 'O Allah, make it easy, not difficult.'",
+  "40 din, ek target — har din uss target ke thoda qareeb.",
+  "Your future patients are counting on the effort you put in today.",
+  "Tiredness is temporary. Regret over an unattempted chapter isn't.",
+  "Rabbana atina fid dunya hasanah — a short dua for ease in this journey.",
+  "Hasbunallahu wa ni'mal wakeel — 'Allah is sufficient for us, and He is the best disposer of affairs.'",
+  "Wa tawakkal 'alallah — trust Allah with the outcome, but don't skip today's effort.",
+  "Rabbi inni maghlubun fantasir — a dua of the helpless, asking Allah for help against hardship.",
+  "La hawla wa la quwwata illa billah — there is no power except with Allah; lean on Him when tired."
+];
+const FACTS = [
+  "Bio: Mitochondria has its own DNA — maternally inherited in humans.",
+  "Chem: Noble gases have complete octets, making them largely inert.",
+  "Phy: Instantaneous velocity is the slope of the tangent on a displacement-time graph.",
+  "Bio: RBCs have no nucleus in mammals — more room for hemoglobin.",
+  "Chem: pH + pOH = 14 at 25°C for aqueous solutions.",
+  "Phy: Work done is zero if displacement is zero, even with large force applied.",
+  "Bio: Enzymes lower activation energy but don't change reaction equilibrium.",
+  "Chem: Benzene resists addition reactions due to aromatic ring stability.",
+  "Phy: In projectile motion, horizontal velocity stays constant (no air resistance).",
+  "Bio: Insulin lowers blood glucose; glucagon raises it — opposite pancreatic hormones.",
+  "Chem: Alkynes are more reactive than alkenes in addition reactions.",
+  "Phy: Resistors in series: current same, voltage divides; parallel: voltage same, current divides.",
+  "Bio: Xylem transports water upward; phloem transports food both ways.",
+  "Chem: Catalysts speed up reactions without being consumed.",
+  "Phy: A body in uniform circular motion has constant speed but changing velocity."
+];
+
+function planDayIndex(){
+  // days elapsed since plan start (11 Aug 2026), wraps for quote/fact rotation
+  const start = new Date('2026-08-11T00:00:00');
+  const today = new Date(todayISO() + 'T00:00:00');
+  const diff = Math.floor((today - start) / 86400000);
+  return diff >= 0 ? diff : 0;
+}
+
+function renderInspiration(){
+  const idx = planDayIndex();
+  document.getElementById('quoteText').textContent = QUOTES[idx % QUOTES.length];
+  document.getElementById('factText').textContent = FACTS[idx % FACTS.length];
+}
+
+function renderMilestone(daysLeft, doneCount){
+  const el = document.getElementById('milestoneBanner');
+  let msg = '';
+  if (daysLeft === 0) msg = '🎯 Exam day is here — you\'ve got this!';
+  else if ([30,20,10,5,1].includes(daysLeft)) msg = `⏳ ${daysLeft} day${daysLeft>1?'s':''} to exam — stay steady!`;
+  else if (doneCount > 0 && doneCount % 10 === 0) msg = `🏆 ${doneCount}/40 days completed — great momentum!`;
+  if (msg) { el.textContent = msg; el.classList.add('show'); }
+  else { el.classList.remove('show'); }
+}
+
+function renderWeakTopics(){
+  const items = [];
+  ALL_DAYS.forEach(d => {
+    const s = state[dayKey(d.n)] || {};
+    const blocks = s.blocks || {};
+    Object.keys(blocks).forEach(bk => {
+      const b = blocks[bk];
+      if (b.tags && b.tags.includes('Weak points')) {
+        items.push({day:d.n, date:d.date, book: b.book || TIME_BLOCKS.find(t=>t.key===bk).label});
+      }
+    });
+  });
+  const panel = document.getElementById('weakPanel');
+  if (!items.length) {
+    panel.innerHTML = `<h3>🎯 Weak Topics</h3><div class="weak-empty">No weak points tagged yet — mark them in a day's time-of-day log.</div>`;
+    return;
+  }
+  panel.innerHTML = `<h3>🎯 Weak Topics</h3><ul class="weak-list">` +
+    items.map(it => `<li><span>Day ${it.day} · ${it.date}</span><span class="wl-book">${it.book}</span></li>`).join('') +
+    `</ul>`;
+}
+
+function renderChart(){
+  const points = ALL_DAYS.filter(d => {
+    const s = state[dayKey(d.n)];
+    return s && s.mcqTotal > 0;
+  }).map(d => {
+    const s = state[dayKey(d.n)];
+    return { n: d.n, acc: Math.round((s.mcqCorrect||0)/s.mcqTotal*100) };
+  });
+  const panel = document.getElementById('chartPanel');
+  if (points.length < 2) {
+    panel.innerHTML = `<h3>📈 Accuracy Trend</h3><div class="weak-empty">Log MCQs on at least 2 days to see your trend.</div>`;
+    return;
+  }
+  const w = 280, h = 120, pad = 10;
+  const xStep = (w - pad*2) / (40 - 1);
+  const yFor = acc => h - pad - (acc/100)*(h - pad*2);
+  const pathPts = points.map(p => `${pad + (p.n-1)*xStep},${yFor(p.acc)}`).join(' ');
+  panel.innerHTML = `<h3>📈 Accuracy Trend</h3>
+    <svg class="chart-svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+      <polyline points="${pathPts}" fill="none" stroke="#d63a4e" stroke-width="2"/>
+      ${points.map(p => `<circle cx="${pad + (p.n-1)*xStep}" cy="${yFor(p.acc)}" r="2.5" fill="#d63a4e"/>`).join('')}
+    </svg>`;
+}
+
+function dayKey(n){ return 'day-' + n; }
+
+// ---- Subject-wise time pie chart ----
+const SUBJECT_HEX = { bio:'#1f9d6f', chem:'#6f4fd8', phy:'#e0792e', eng:'#1c8fa6', catch:'#c9971f', test:'#d63a4e', mock:'#a3172f', rev:'#c23e8f' };
+function effectiveHours(n){
+  const bs = blocksSubtotal(n);
+  if (bs > 0) return bs;
+  const s = state[dayKey(n)];
+  return (s && s.hours) || 0;
+}
+function renderPie(){
+  const totals = {};
+  ALL_DAYS.forEach(d => { totals[d.type] = (totals[d.type]||0) + effectiveHours(d.n); });
+  const grand = Object.values(totals).reduce((a,b)=>a+b,0);
+  const panel = document.getElementById('piePanel');
+  if (grand <= 0) {
+    panel.innerHTML = `<h3>🥧 Subject Time Split</h3><div class="weak-empty">Log some study hours to see the split.</div>`;
+    return;
+  }
+  let acc = 0;
+  const stops = [];
+  Object.keys(totals).forEach(type => {
+    if (totals[type] <= 0) return;
+    const pct = (totals[type]/grand)*100;
+    stops.push(`${SUBJECT_HEX[type]} ${acc}% ${acc+pct}%`);
+    acc += pct;
+  });
+  const legend = Object.keys(totals).filter(t=>totals[t]>0).sort((a,b)=>totals[b]-totals[a])
+    .map(t => `<div class="pie-legend-row"><span><span class="dot" style="background:${SUBJECT_HEX[t]};width:9px;height:9px;border-radius:50%;display:inline-block;"></span>${SUBJECTS[t].label}</span><span>${Math.round(totals[t]*10)/10}h (${Math.round(totals[t]/grand*100)}%)</span></div>`).join('');
+  panel.innerHTML = `<h3>🥧 Subject Time Split</h3>
+    <div class="pie-wrap">
+      <div class="pie" style="background:conic-gradient(${stops.join(',')})"></div>
+      <div class="pie-legend">${legend}</div>
+    </div>`;
+}
+
+// ---- Badges ----
+const BADGES = [
+  {id:'streak7', icon:'🔥', label:'7-Day Streak', test: ({streak}) => streak >= 7},
+  {id:'streak14', icon:'🔥', label:'14-Day Streak', test: ({streak}) => streak >= 14},
+  {id:'quarter', icon:'🥉', label:'10 Days Done', test: ({done}) => done >= 10},
+  {id:'half', icon:'🥈', label:'20 Days Done', test: ({done}) => done >= 20},
+  {id:'threeq', icon:'🥇', label:'30 Days Done', test: ({done}) => done >= 30},
+  {id:'full', icon:'🏆', label:'40/40 Champion', test: ({done}) => done >= 40},
+  {id:'bookworm', icon:'📚', label:'100+ Hrs Logged', test: ({totalHrs}) => totalHrs >= 100},
+  {id:'sharp', icon:'🎯', label:'85%+ Accuracy', test: ({mcqTotal, mcqCorrect}) => mcqTotal >= 100 && (mcqCorrect/mcqTotal) >= 0.85}
+];
+function renderBadges(doneCount, streak){
+  let mcqTotal=0, mcqCorrect=0, totalHrs=0;
+  ALL_DAYS.forEach(d => {
+    const s = state[dayKey(d.n)] || {};
+    mcqTotal += s.mcqTotal || 0;
+    mcqCorrect += s.mcqCorrect || 0;
+    totalHrs += effectiveHours(d.n);
+  });
+  const ctx = { done: doneCount, streak, mcqTotal, mcqCorrect, totalHrs };
+  const panel = document.getElementById('badgesPanel');
+  panel.innerHTML = `<h3>🏆 Badges</h3><div class="badges-grid">` +
+    BADGES.map(b => {
+      const earned = b.test(ctx);
+      return `<div class="badge-chip ${earned?'earned':''}"><div class="bi">${b.icon}</div><div class="bl">${b.label}</div></div>`;
+    }).join('') + `</div>`;
+}
+
+// ---- Mini calendar overview ----
+function renderMiniCal(){
+  const todayStr = todayISO();
+  const cal = document.getElementById('miniCal');
+  cal.innerHTML = ALL_DAYS.map(d => {
+    const s = state[dayKey(d.n)] || {};
+    const isToday = effectiveDateISO(d.n) === todayStr;
+    return `<div class="mini-cal-cell ${s.done?'done':''} ${isToday?'today':''}" style="background:${SUBJECT_HEX[d.type]}" title="Day ${d.n} · ${SUBJECTS[d.type].label}${s.done?' · done':''}">${d.n}</div>`;
+  }).join('');
+}
+
+// ---- Subject completion % ----
+function renderSubjectCompletion(){
+  const totals = {}, doneT = {};
+  ALL_DAYS.forEach(d => {
+    totals[d.type] = (totals[d.type]||0) + 1;
+    const s = state[dayKey(d.n)];
+    if (s && s.done) doneT[d.type] = (doneT[d.type]||0) + 1;
+  });
+  const panel = document.getElementById('subjPctPanel');
+  panel.innerHTML = `<h3>📊 Subject Completion</h3>` +
+    Object.keys(totals).map(t => {
+      const pct = Math.round(((doneT[t]||0)/totals[t])*100);
+      return `<div class="subj-bar-row">
+        <div class="subj-bar-head"><span>${SUBJECTS[t].label}</span><span>${doneT[t]||0}/${totals[t]} (${pct}%)</span></div>
+        <div class="subj-bar-track"><div class="subj-bar-fill" style="width:${pct}%;background:${SUBJECT_HEX[t]}"></div></div>
+      </div>`;
+    }).join('');
+}
+
+// ---- Shareable progress text ----
+function renderShareText(daysLeft, doneCount, streak, fajrStreak){
+  let mcqTotal=0, mcqCorrect=0, totalHrs=0;
+  ALL_DAYS.forEach(d => {
+    const s = state[dayKey(d.n)] || {};
+    mcqTotal += s.mcqTotal || 0;
+    mcqCorrect += s.mcqCorrect || 0;
+    totalHrs += effectiveHours(d.n);
+  });
+  const acc = mcqTotal > 0 ? Math.round((mcqCorrect/mcqTotal)*100) : 0;
+  const idx = planDayIndex() + 1;
+  const lines = [
+    `📚 40 Days: Ilm + Ibadat + Discipline — Day ${Math.min(idx,40)}/40`,
+    `✅ Days completed: ${doneCount}/40`,
+    `🔥 Streak: ${streak} days · 🕌 Fajr streak: ${fajrStreak} days`,
+    `⏱️ Total hours studied: ${Math.round(totalHrs*10)/10}`,
+    `📝 MCQ accuracy: ${acc}% (${mcqCorrect}/${mcqTotal})`,
+    `⏳ ${daysLeft} days left to MDCAT 2026`
+  ];
+  document.getElementById('shareText').value = lines.join('\n');
+}
+
+// ---- Syllabus coverage checklist ----
+const VOCAB_DAYS = {"1":[["abundant","existing in large quantity","plentiful","scarce","Fruits were abundant in the orchard."],["adverse","harmful or unfavorable","unfavorable","favorable","The drug had adverse side effects."],["ambiguous","open to more than one meaning","unclear","clear","His answer was ambiguous and confusing."],["benevolent","kind and generous","kindly","malicious","The benevolent donor funded the hospital."],["candid","truthful and straightforward","frank","evasive","She gave a candid opinion about the plan."],["deceive","to mislead by lying","trick","enlighten","He tried to deceive the examiner."],["eloquent","fluent and persuasive in speech","articulate","inarticulate","The speaker was eloquent and confident."],["frugal","careful with money, thrifty","economical","wasteful","She lived a frugal student life."],["gullible","easily deceived","naive","shrewd","The gullible boy believed every rumor."],["hostile","unfriendly or aggressive","antagonistic","friendly","The crowd turned hostile after the delay."],["impartial","treating all sides equally","unbiased","biased","The judge remained impartial throughout."],["jubilant","feeling great happiness","elated","sorrowful","Students were jubilant after the results."],["lucid","clear and easy to understand","clear","confusing","He gave a lucid explanation of the topic."],["meticulous","very careful and precise","thorough","careless","She is meticulous about her notes."],["notorious","famous for something bad","infamous","reputable","The area was notorious for theft."],["obsolete","no longer in use","outdated","modern","That method of teaching is obsolete now."],["pragmatic","dealing with things practically","practical","idealistic","He took a pragmatic approach to the problem."],["quaint","attractively unusual or old-fashioned","charming","modern","They stayed in a quaint village inn."],["reluctant","unwilling to do something","unwilling","eager","She was reluctant to attend the mock test."],["scarce","insufficient for demand","rare","abundant","Clean water was scarce in the drought."],["tedious","long, dull and tiresome","boring","exciting","Revising formulas felt tedious at night."],["unanimous","in full agreement","united","divided","The decision was unanimous among students."],["vague","not clearly expressed","unclear","precise","His directions were too vague to follow."],["wary","cautious about danger","cautious","careless","Be wary of unreliable MCQ sources."],["zealous","having great energy for a cause","passionate","indifferent","He was zealous about finishing the syllabus."],["abrupt","sudden and unexpected","sudden","gradual","The lecture came to an abrupt end."],["blunt","direct and plain-spoken","frank","subtle","Her feedback was blunt but honest."],["coherent","logical and consistent","logical","confusing","He wrote a coherent answer script."],["diligent","showing careful, persistent effort","hardworking","lazy","A diligent student revises daily."],["austere","plain and without luxury","strict","luxurious","He followed an austere study routine."]],"2":[["elated","very happy and excited","thrilled","dejected","She felt elated after the mock test."],["feeble","lacking strength","weak","strong","His feeble excuse convinced no one."],["generous","willing to give freely","giving","stingy","The teacher was generous with her time."],["humble","modest, not proud","modest","arrogant","He stayed humble despite top marks."],["immense","extremely large","huge","tiny","There is an immense syllabus to cover."],["jovial","cheerful and friendly","cheerful","gloomy","The jovial teacher made class fun."],["kindle","to start a fire or feeling","ignite","extinguish","The lecture kindled her interest in biology."],["lament","to express sorrow","mourn","celebrate","He lamented the wasted study hours."],["magnify","to make appear larger","enlarge","reduce","A microscope magnifies the cell structure."],["naive","lacking experience or judgement","innocent","worldly","It was naive to skip revision."],["obstinate","stubbornly refusing to change","stubborn","flexible","He was obstinate about his wrong method."],["plausible","seeming reasonable or probable","believable","unlikely","That's a plausible explanation for the error."],["quell","to suppress or calm","suppress","incite","Deep breathing can quell exam anxiety."],["rigid","not able to bend, strict","stiff","flexible","He followed a rigid study schedule."],["solemn","formal and serious","serious","cheerful","The exam hall had a solemn silence."],["tranquil","calm and peaceful","calm","chaotic","Early morning is a tranquil study time."],["urge","strong desire, or to encourage","push","discourage","Teachers urge students to revise daily."],["vivid","producing clear, powerful images","clear","dull","He gave a vivid description of the process."],["wither","to shrink or become weak","shrivel","flourish","Motivation can wither without a break."],["yield","to produce, or to give way","produce","resist","Daily practice will yield better scores."],["abolish","to formally end a system","eliminate","establish","The old syllabus was abolished this year."],["brief","short in duration","short","lengthy","Keep your answer brief and precise."],["cautious","careful to avoid risk","careful","reckless","Be cautious while guessing MCQs."],["dismal","depressing, dark","gloomy","cheerful","The first mock score looked dismal."],["exotic","unusual, from a distant place","foreign","familiar","The topic felt exotic and unfamiliar."],["fragile","easily broken or weak","delicate","sturdy","Confidence can be fragile before exams."],["grim","serious and forbidding","harsh","cheerful","The results looked grim at first glance."],["harsh","severe or unpleasant","severe","gentle","The examiner gave harsh but fair feedback."],["ignite","to set alight or start","spark","extinguish","The teacher's story ignited curiosity."],["jeopardize","to put at risk","endanger","protect","Skipping sleep can jeopardize your focus."]],"3":[["knack","a natural skill for something","talent","inability","She has a knack for solving MCQs fast."],["lethargic","lacking energy, sluggish","sluggish","energetic","He felt lethargic after a poor sleep."],["morose","sullen and ill-tempered","gloomy","cheerful","He was morose after the low score."],["nimble","quick and light in movement","agile","clumsy","A nimble mind solves puzzles faster."],["opaque","not transparent, hard to understand","unclear","transparent","The explanation was opaque to beginners."],["pensive","deeply thoughtful","thoughtful","carefree","She looked pensive before the test."],["quirky","unusual in an appealing way","unconventional","ordinary","He has a quirky way of memorizing dates."],["resilient","able to recover quickly","tough","fragile","Stay resilient after a bad mock test."],["sturdy","strongly built","robust","flimsy","Build a sturdy foundation in Biology."],["thrive","to grow or develop well","flourish","decline","Students thrive with a steady routine."],["ubiquitous","present everywhere","widespread","rare","MCQ practice is ubiquitous in test prep."],["vibrant","full of energy and life","lively","dull","The classroom had a vibrant discussion."],["wane","to gradually decrease","decline","increase","His motivation waned by week three."],["apathy","lack of interest or concern","indifference","enthusiasm","Fatigue can lead to apathy toward study."],["bleak","without hope, grim","dismal","hopeful","The chart looked bleak before revision."],["clarity","the quality of being clear","clearness","confusion","Practice brings clarity to tough concepts."],["dubious","doubtful, uncertain","doubtful","certain","He was dubious about the shortcut method."],["exempt","free from an obligation","excused","liable","Toppers are sometimes exempt from retest."],["fluent","able to express oneself easily","articulate","halting","She became fluent in English gradually."],["grave","serious, giving cause for concern","serious","trivial","A grave mistake in dosage can be fatal."],["hasty","done with excessive speed","rushed","careful","A hasty answer often has errors."],["indolent","lazy, avoiding effort","lazy","diligent","An indolent routine won't finish the plan."],["jargon","special words used in a field","terminology","plain language","Medical jargon takes time to learn."],["lavish","giving generously, or luxurious","generous","sparing","He was lavish with revision time on weak topics."],["meager","small in amount, insufficient","scanty","abundant","The meager sleep hurt his focus."],["novel","new and original","original","conventional","She tried a novel technique for memorizing formulas."],["ominous","giving a sense of danger ahead","threatening","promising","The low mock score felt ominous."],["pertinent","relevant to the matter","relevant","irrelevant","Only revise pertinent chapters before the exam."],["quench","to satisfy thirst or extinguish","satisfy","ignite","Water quenches thirst during long study sessions."],["robust","strong and healthy","sturdy","weak","Build a robust base in Chemistry basics."]],"4":[["sparse","thinly scattered, not dense","scanty","dense","Revision notes were sparse for this topic."],["tangible","able to be touched, real","concrete","abstract","Consistent hours give tangible results."],["unveil","to reveal or make known","reveal","conceal","The academy will unveil the new test schedule."],["vexed","annoyed or worried","annoyed","pleased","She was vexed by the repeated mistake."],["whimsical","playfully quaint or fanciful","fanciful","serious","He drew whimsical diagrams to remember steps."],["abate","to become less intense","subside","intensify","The exam stress began to abate after practice."],["brisk","quick and energetic","swift","sluggish","A brisk revision covered three chapters."],["candor","openness and honesty","frankness","deceit","She spoke with candor about her weak areas."],["diminish","to make or become smaller","decrease","increase","Confidence can diminish after one bad test."],["essence","the basic nature of something","core","periphery","Understand the essence of the concept, not just facts."],["fabricate","to invent or make up","invent","verify","Never fabricate data in a lab report."],["genuine","authentic, real","authentic","fake","Genuine effort shows in daily consistency."],["hinder","to create difficulty for","obstruct","assist","Poor sleep can hinder memory retention."],["inept","having no skill for a task","incompetent","skilled","He felt inept at solving physics numericals."],["jest","a joke, or to joke","joke","seriousness","He said it in jest, not seriously."],["keenness","intensity of feeling or interest","eagerness","apathy","Her keenness for biology was obvious."],["lofty","very high, or noble","elevated","modest","He set lofty targets for the mock test."],["mundane","lacking excitement, ordinary","routine","extraordinary","Daily revision can feel mundane but works."],["nurture","to care for and encourage growth","foster","neglect","Nurture a habit of daily MCQ practice."],["obscure","not well known, unclear","unclear","obvious","The topic remained obscure until revision."],["prudent","acting with care and thought","careful","reckless","It's prudent to attempt easy MCQs first."],["quibble","to argue over a minor point","nitpick","agree","Don't quibble over one mark in practice tests."],["ratify","to confirm formally","approve","reject","The board will ratify the new exam pattern."],["stark","severe or bare in appearance","harsh","mild","There was a stark difference between the two scores."],["tenacious","holding firmly, persistent","persistent","yielding","Stay tenacious even after a low mock score."],["unravel","to undo or investigate","untangle","entangle","Practice helps unravel tricky word problems."],["vindicate","to clear from blame","justify","condemn","The final result vindicated his study method."],["wistful","having a feeling of vague longing","yearning","content","She felt wistful thinking of wasted days."],["ample","more than enough","sufficient","insufficient","Give ample time to your weakest subject."],["barren","not productive, empty","unproductive","fertile","A barren revision plan wastes the day."]],"5":[["coax","to persuade gently","persuade","force","She coaxed herself into an early start."],["defy","to openly resist","resist","obey","He defied fatigue and kept revising."],["elusive","difficult to find or achieve","hard to catch","obvious","A perfect score felt elusive at first."],["frivolous","not serious, silly","trivial","serious","Avoid frivolous distractions during study hours."],["gregarious","sociable, fond of company","sociable","reserved","He is gregarious but still finds study time."],["haphazard","without order or plan","random","organized","A haphazard schedule wastes valuable hours."],["imminent","about to happen","impending","distant","With the exam imminent, revision intensified."],["ludicrous","absurd, ridiculous","absurd","sensible","It's ludicrous to skip sleep entirely."],["meddle","to interfere unnecessarily","interfere","ignore","Don't let doubts meddle with your plan."],["nostalgic","longing for the past","sentimental","indifferent","He felt nostalgic about first-year classes."],["ornate","elaborately decorated","elaborate","plain","The notes had ornate but unclear diagrams."],["petty","of little importance","trivial","significant","Don't worry over petty mistakes in practice."],["quandary","a state of uncertainty","dilemma","certainty","She was in a quandary about which subject first."],["reckless","without thinking of consequences","careless","cautious","Reckless guessing lowers your accuracy."],["subtle","not obvious, delicate","understated","obvious","There's a subtle difference between the two options."],["taut","stretched tight, tense","tense","slack","His schedule was taut with no free time."],["uphold","to support or maintain","support","abandon","Uphold your daily Fajr and study routine."],["valiant","showing courage","brave","cowardly","It was a valiant effort despite the tough paper."],["banter","playful teasing conversation","joking","seriousness","A little banter eased the exam tension."],["dexterous","skillful with hands or mind","skillful","clumsy","She is dexterous at quick calculations."],["evade","to avoid or escape","avoid","confront","Don't evade your weakest topics."],["flourish","to grow or develop successfully","thrive","decline","His accuracy flourished after daily MCQs."],["glib","fluent but insincere","smooth-talking","sincere","A glib answer without understanding won't help."],["hapless","unlucky","unfortunate","fortunate","The hapless student forgot his admit card."],["incite","to encourage or stir up","provoke","calm","A good teacher can incite curiosity."],["jaded","tired and bored from overwork","exhausted","fresh","He felt jaded after back-to-back mocks."],["keen","eager or sharp","eager","indifferent","She is keen to improve her weak chapters."],["languish","to lose strength or motivation","weaken","thrive","Don't let your plan languish mid-way."],["mellow","relaxed and easy-going","calm","harsh","A mellow evening helps before a big test."],["negate","to make ineffective, cancel out","nullify","confirm","One careless mistake can negate hours of work."]],"6":[["malign","to speak evil of","slander","praise","Don't malign your own effort after one bad test."],["negligent","failing to take proper care","careless","careful","Negligent revision leads to silly mistakes."],["oblivious","unaware of what's happening","unaware","aware","He was oblivious to the time passing."],["placid","calm and peaceful","calm","agitated","Keep a placid mind during the exam."],["quarrelsome","given to arguing","argumentative","peaceful","A quarrelsome mood distracts from study."],["reticent","reserved, not revealing thoughts","reserved","outspoken","He was reticent about his mock scores."],["serene","calm, untroubled","tranquil","chaotic","A serene morning routine boosts focus."],["terse","brief and to the point","concise","wordy","Keep MCQ notes terse for quick revision."],["unruly","disorderly, hard to control","disorderly","obedient","An unruly schedule needs more discipline."],["vigilant","keeping careful watch","watchful","careless","Stay vigilant against silly calculation errors."],["wholesome","conducive to health, good","healthy","harmful","A wholesome routine includes rest and namaz."],["adept","very skilled","skilled","unskilled","She became adept at solving physics numericals."],["boisterous","noisy and energetic","rowdy","quiet","The boisterous class settled down for the mock test."],["cordial","warm and friendly","friendly","hostile","The teacher kept a cordial tone despite mistakes."],["dwindle","to gradually decrease","diminish","grow","His free time dwindled as exams neared."],["exuberant","full of energy and enthusiasm","enthusiastic","subdued","She was exuberant after a good mock score."],["fickle","changing frequently, unreliable","inconsistent","steady","Don't let a fickle mood control your schedule."],["grueling","extremely tiring and demanding","exhausting","easy","It was a grueling but productive study week."],["inevitable","certain to happen","unavoidable","avoidable","Mistakes are inevitable during practice — learn from them."],["jolt","a sudden shock or shake","shock","calm","The low score gave him a needed jolt."],["mock","to imitate or ridicule; also a practice test","imitate","praise","Take a mock test every weekend."],["notable","worthy of attention","remarkable","unremarkable","There was a notable improvement in accuracy."],["poignant","evoking deep feeling","touching","unmoving","It was a poignant reminder to value time."],["restive","unable to keep still, impatient","restless","calm","He felt restive waiting for results."],["sagacious","having good judgement, wise","wise","foolish","A sagacious student plans revision early."],["tenuous","very weak or slight","weak","strong","His grip on the topic was tenuous."],["unwavering","steady, not weakening","steadfast","hesitant","Keep an unwavering focus for the last week."],["vicarious","experienced through another person","indirect","direct","He felt vicarious pride in his sister's success."],["ardent","very enthusiastic or passionate","passionate","indifferent","She is an ardent believer in daily practice."],["bewilder","to confuse greatly","confuse","clarify","The long question bewildered many students."]],"7":[["condone","to accept and forgive","excuse","condemn","Don't condone your own laziness."],["deft","neatly skillful","skillful","clumsy","A deft hand helps in lab practicals."],["enigma","a puzzling person or thing","mystery","certainty","The tricky question was an enigma at first."],["fervent","intense and passionate","passionate","apathetic","He made a fervent effort in the final week."],["gaunt","thin and haggard","haggard","plump","Lack of sleep left him gaunt and tired."],["impetuous","acting without thinking","impulsive","cautious","An impetuous guess is riskier than a calculated one."],["jeer","to mock rudely","mock","praise","Don't let anyone's jeer affect your confidence."],["kindred","similar in nature, related","similar","different","She found kindred spirits in her study group."],["laudable","deserving praise","praiseworthy","shameful","His consistency is truly laudable."],["meander","to wander without a clear direction","wander","go directly","Don't let your revision meander without a plan."],["niche","a specialized area or role","specialty","generality","Find your niche subject and build from there."],["opulent","luxurious, lavish","luxurious","modest","Success doesn't need an opulent setup, just discipline."],["quiver","to shake with a slight tremor","tremble","steady","His hand quivered before opening the result."],["rebuff","to reject bluntly","reject","welcome","He rebuffed the idea of skipping Fajr."],["staunch","firm and loyal","loyal","disloyal","She remained a staunch supporter of the study plan."],["thrifty","careful with money or resources","economical","wasteful","Being thrifty with time matters as much as money."],["upright","strictly honest, or vertical","honest","dishonest","He is known for his upright character."],["vast","very large in area or extent","immense","tiny","The syllabus felt vast in the beginning."],["ambivalent","having mixed feelings","uncertain","decided","She felt ambivalent about changing her strategy."],["brazen","bold and without shame","shameless","timid","It was brazen to skip revision entirely."],["capitulate","to give up resistance","surrender","resist","Don't capitulate to distractions this week."],["disdain","a feeling of contempt","scorn","respect","He showed disdain for shortcuts that skip understanding."],["evoke","to bring a feeling or memory to mind","arouse","suppress","The topic evoked memories of first-year classes."],["feasible","possible to achieve","achievable","impossible","A 12-hour study day isn't always feasible."],["hollow","empty inside, insincere","empty","solid","A hollow promise to study 'tomorrow' helps no one."],["indignant","feeling angry at unfair treatment","resentful","content","She felt indignant about the unfair grading."],["keepsake","an item kept for sentimental reasons","memento","-","He kept his first mock test as a keepsake."],["lenient","more merciful than expected","merciful","strict","The examiner was lenient with the time limit."],["onerous","involving great effort, burdensome","burdensome","easy","The workload felt onerous in week two."],["pacify","to calm someone down","calm","provoke","Deep breaths can pacify exam-day nerves."]],"8":[["querulous","complaining in a whining manner","complaining","content","Avoid a querulous attitude toward tough chapters."],["ramble","to talk at length without focus","wander","focus","Try not to ramble in your written answers."],["scrupulous","extremely careful and thorough","meticulous","careless","Be scrupulous while marking the OMR sheet."],["tumult","a state of confusion or noise","chaos","calm","The exam hall was in tumult before instructions."],["unfathomable","impossible to understand fully","incomprehensible","clear","Organic chemistry felt unfathomable at first."],["adamant","refusing to change one's mind","firm","flexible","She was adamant about finishing the plan."],["benign","gentle, not harmful","harmless","harmful","It was a benign mistake, easily corrected."],["credible","able to be believed","believable","unbelievable","Use only credible sources for MCQ practice."],["ebullient","cheerful and full of energy","exuberant","gloomy","She was ebullient after the accuracy jump."],["forthright","direct and honest","candid","evasive","He gave forthright feedback on the mock test."],["grimace","a twisted facial expression of pain","wince","smile","He grimaced at the tricky numerical."],["hedge","to avoid a direct answer or commitment","evade","commit","Don't hedge on your daily study target."],["incisive","showing clear, sharp thinking","sharp","vague","Her incisive analysis found the weak topic fast."],["jaunty","cheerful and self-confident","lively","gloomy","He walked in with a jaunty, confident step."],["meddlesome","interfering in others' affairs","interfering","unobtrusive","Ignore meddlesome comparisons with other students."],["nonchalant","calmly indifferent","unconcerned","anxious","He stayed nonchalant despite the tough paper."],["obdurate","stubbornly refusing to change","stubborn","yielding","He was obdurate about his outdated method."],["rancor","bitter resentment","bitterness","goodwill","Let go of rancor over a low mock score."],["subdue","to overcome or bring under control","overcome","provoke","Practice helps subdue exam-day nerves."],["tactful","careful not to offend","diplomatic","blunt","Be tactful when discussing a friend's weak score."],["unassuming","modest, not pretentious","modest","arrogant","The topper was unassuming about the top score."],["vigor","physical or mental strength","energy","lethargy","Start each day's revision with vigor."],["waver","to be unsteady, hesitate","hesitate","persist","Don't waver on your study schedule."],["zeal","great energy for a cause","enthusiasm","apathy","Approach the last week with fresh zeal."],["abhor","to detest strongly","despise","adore","She abhors last-minute cramming."],["brevity","shortness in speaking or writing","conciseness","wordiness","Brevity helps when time is short in the exam."],["cajole","to persuade with flattery","coax","force","She cajoled herself into an early morning start."],["deplete","to reduce in quantity","exhaust","replenish","Long nights can deplete your energy for the day."],["ethical","relating to moral principles","moral","unethical","Follow ethical practice during the actual exam."],["garrulous","excessively talkative","talkative","reserved","A garrulous friend can eat into study time."]],"9":[["hoard","to accumulate and store away","stockpile","distribute","Don't hoard unsolved MCQs till the last day."],["illicit","forbidden by law or rules","illegal","legal","Illicit shortcuts in the exam risk disqualification."],["listless","lacking energy or enthusiasm","sluggish","energetic","Poor sleep left him listless in class."],["morbid","having an unhealthy interest in negative things","gloomy","cheerful","Avoid morbid thoughts about failing before trying."],["opine","to state an opinion","state","-","He opined that revision beats new topics now."],["partisan","strongly biased in support of a side","biased","impartial","Avoid partisan arguments over which book is best."],["quixotic","unrealistically idealistic","unrealistic","practical","A quixotic plan to cover everything in one day failed."],["ravage","to cause severe damage","devastate","restore","Panic can ravage your exam performance."],["sober","serious and thoughtful, not exaggerated","serious","frivolous","Take a sober look at your weak areas."],["tantamount","equivalent in effect","equivalent","different","Skipping revision is tantamount to inviting mistakes."],["verbose","using more words than needed","wordy","concise","Keep your written answers short, not verbose."],["adroit","clever and skillful","skillful","clumsy","She is adroit at time management during tests."],["buoyant","cheerful and optimistic","optimistic","despondent","Stay buoyant even after a tough mock test."],["contentious","likely to cause disagreement","controversial","agreeable","The topic was contentious among the study group."],["exalt","to praise highly","glorify","criticize","Don't exalt one subject while ignoring others."],["fastidious","very attentive to detail","meticulous","careless","Be fastidious while checking your OMR answers."],["grievance","a real or imagined cause for complaint","complaint","satisfaction","He raised a grievance about the unfair test."],["illustrious","well known and respected","renowned","obscure","She dreams of an illustrious medical career."],["lucrative","producing a good income","profitable","unprofitable","Medicine is seen as a lucrative and respected career."],["myriad","a very large number","countless","few","There are myriad ways to solve one MCQ."],["novice","a person new to a skill","beginner","expert","Every expert was once a novice."],["ostentatious","showy, designed to impress","showy","modest","Focus on results, not ostentatious study setups."],["prevail","to win or persist over difficulty","triumph","fail","Consistent effort will prevail over talent alone."],["rigorous","thorough and demanding","strict","lax","MDCAT requires a rigorous study plan."],["scanty","small in amount, insufficient","meager","abundant","His notes on this chapter were scanty."],["taciturn","saying little, reserved","reserved","talkative","He was taciturn about his mock test score."],["unbiased","showing no prejudice","impartial","biased","Get an unbiased opinion on your weak areas."],["vivacious","attractively lively and animated","lively","dull","Her vivacious energy lifted the study group's mood."],["zealot","a fanatical follower of a cause","fanatic","moderate","Don't become a zealot for one single method."],["forsake","to abandon or give up","abandon","embrace","Don't forsake sleep entirely for extra hours."]],"10":[["avid","having great enthusiasm","keen","indifferent","He is an avid reader of biology notes."],["callous","showing no concern for others' feelings","unfeeling","compassionate","Don't be callous about a friend's low score."],["decisive","settling an issue firmly","resolute","indecisive","Be decisive when choosing which MCQ answer to mark."],["entice","to attract by offering pleasure","tempt","repel","Social media can entice you away from study time."],["forlorn","pitifully sad and abandoned","miserable","cheerful","He looked forlorn after missing the target."],["credulous","too ready to believe things","gullible","skeptical","Don't be credulous about 'guaranteed' shortcuts."],["humane","having compassion for others","compassionate","cruel","Be humane with yourself after a bad day."],["idle","not active or in use","inactive","busy","Don't let your evening study slot stay idle."],["jocular","fond of joking, humorous","playful","serious","A jocular teacher keeps long lectures light."],["latent","existing but not yet developed","hidden","obvious","He discovered a latent talent for physics."],["mirth","amusement, especially expressed in laughter","amusement","sorrow","A little mirth relieves exam stress."],["nourish","to provide with food or support","sustain","starve","Nourish your focus with proper meals and sleep."],["ordeal","a difficult or painful experience","trial","ease","The mock exam was an ordeal but useful."],["pious","devoutly religious","devout","irreligious","He stayed pious with his five daily prayers."],["rapport","a close, harmonious relationship","connection","discord","Build rapport with a study partner for accountability."],["sage","wise, or a wise person","wise","foolish","Her sage advice was to revise, not cram."],["timid","lacking courage, shy","shy","bold","Don't be timid about asking your teacher questions."],["disentangle","to free from a tangled state","untangle","entangle","Disentangle confusing formulas by writing them out."],["valor","great courage in the face of danger","bravery","cowardice","It takes valor to admit a weak subject."],["whimper","a weak, feeble cry","whine","cheer","Don't whimper over one hard paper — adjust and move on."],["abrasive","harsh and rough in manner","harsh","gentle","Avoid abrasive self-talk after a mistake."],["biased","unfairly favoring one side","prejudiced","impartial","A biased self-review won't show real weak points."],["chronic","persisting for a long time","persistent","temporary","Chronic procrastination is the real enemy, not the syllabus."],["dormant","temporarily inactive","inactive","active","Old notes shouldn't stay dormant — revise them."],["exile","to send away from one's home","banish","welcome","Exile distractions from your study room."],["feign","to pretend to feel something","pretend","genuine","Don't feign confidence — build it with practice."],["gloat","to boast about one's success","boast","sympathize","Don't gloat over one good mock — stay grounded."],["haggard","looking exhausted","exhausted","fresh","He looked haggard after an all-nighter — avoid that."],["imperil","to put at risk","endanger","protect","Skipping meals can imperil your energy and focus."],["judicious","having good judgement, sensible","sensible","reckless","Be judicious about how you spend your evenings."]]};
+
+const SYLLABUS = {
+  bio: ['Biological Molecules','Enzymes','Cell Structure & Function','Cell Cycle','Variety of Life','Kingdom Plantae/Animalia Overview','Respiration','Support & Movement','Homeostasis','Reproduction','Evolution','Biotechnology','Nervous & Chemical Coordination','Reproduction (2nd Yr)','Genetics','Man & Environment'],
+  chem: ['Stoichiometry','Atomic Structure','Gases','Liquids & Solids','Chemical Equilibrium','Reaction Kinetics','Thermochemistry','Electrochemistry','s & p Block Elements','Transition Elements','Fundamentals of Organic Chemistry','Hydrocarbons','Alkyl Halides','Alcohols & Phenols','Aldehydes & Ketones','Carboxylic Acids','Macromolecules','Industrial Chemistry'],
+  phy: ['Vectors','Motion & Force','Work, Energy, Power','Circular Motion','Fluid Dynamics','Oscillations','Waves','Thermodynamics','Electrostatics','Current Electricity','Electromagnetism','Electromagnetic Induction','Alternating Current','Electronics','Dawn of Modern Physics','Atomic Spectra','Nuclear Physics'],
+  eng: ['Parts of Speech','Tenses','Articles & Prepositions','Sentence Structure','Vocabulary','Comprehension','Critical Thinking','Series Completion','Deductions','Logical Problems','Analogies']
+};
+let syllabusState = {};
+async function loadSyllabus(){
+  try {
+    const r = await storageAPI.get('syllabus-coverage');
+    syllabusState = r ? JSON.parse(r.value) : {};
+  } catch(e) { syllabusState = {}; }
+}
+async function saveSyllabus(){
+  try { await storageAPI.set('syllabus-coverage', JSON.stringify(syllabusState)); } catch(e){}
+}
+function toggleSyllabusItem(subject, idx){
+  const key = subject + '-' + idx;
+  syllabusState[key] = !syllabusState[key];
+  saveSyllabus();
+  renderSyllabus();
+}
+function renderSyllabus(){
+  const subjLabels = {bio:'Biology', chem:'Chemistry', phy:'Physics', eng:'English/Logical Reasoning'};
+  let totalItems = 0, totalDone = 0;
+  const html = Object.keys(SYLLABUS).map(subj => {
+    const items = SYLLABUS[subj];
+    let doneCount = 0;
+    const rows = items.map((topic, i) => {
+      const key = subj + '-' + i;
+      const on = !!syllabusState[key];
+      if (on) doneCount++;
+      return `<div class="syl-item ${on?'on-text':''}">
+        <div class="syl-check ${on?'on':''}" data-subj="${subj}" data-idx="${i}">${on?'✓':''}</div>
+        <span>${topic}</span>
+      </div>`;
+    }).join('');
+    totalItems += items.length;
+    totalDone += doneCount;
+    const pct = Math.round((doneCount/items.length)*100);
+    return `<div class="syl-subject">
+      <div class="syl-subject-head" style="color:${SUBJECT_HEX[subj]}"><span>${subjLabels[subj]}</span><span>${doneCount}/${items.length} (${pct}%)</span></div>
+      ${rows}
+    </div>`;
+  }).join('');
+  document.getElementById('syllabusList').innerHTML = html;
+  const overallPct = totalItems ? Math.round((totalDone/totalItems)*100) : 0;
+  document.getElementById('syllabusOverallPct').textContent = `${totalDone}/${totalItems} (${overallPct}%)`;
+  document.querySelectorAll('.syl-check').forEach(el => {
+    el.onclick = () => toggleSyllabusItem(el.dataset.subj, parseInt(el.dataset.idx));
+  });
+}
+
+// ---- Vocabulary builder ----
+let vocabLearned = {}; // { "day-idx": true }
+let currentVocabDay = '1';
+async function loadVocab(){
+  try {
+    const r = await storageAPI.get('vocab-learned');
+    vocabLearned = r ? JSON.parse(r.value) : {};
+  } catch(e) { vocabLearned = {}; }
+}
+async function saveVocab(){
+  try { await storageAPI.set('vocab-learned', JSON.stringify(vocabLearned)); } catch(e){}
+}
+function toggleVocabWord(day, idx){
+  const key = day + '-' + idx;
+  vocabLearned[key] = !vocabLearned[key];
+  saveVocab();
+  renderVocab();
+}
+function initVocabSelect(){
+  const sel = document.getElementById('vocabDaySelect');
+  const availableDays = Object.keys(VOCAB_DAYS).map(Number).sort((a,b)=>a-b);
+  let opts = availableDays.map(d => `<option value="${d}">Day ${d} (${VOCAB_DAYS[d].length} words)</option>`).join('');
+  for (let d = availableDays.length + 1; d <= 40; d++){
+    opts += `<option value="${d}">Day ${d} (not added yet)</option>`;
+  }
+  sel.innerHTML = opts;
+  sel.value = currentVocabDay;
+  sel.onchange = () => { currentVocabDay = sel.value; renderVocab(); };
+}
+function renderVocab(){
+  const grid = document.getElementById('vocabGrid');
+  const words = VOCAB_DAYS[currentVocabDay];
+  if (!words) {
+    grid.innerHTML = `<div class="vocab-empty">No words added for this day yet. Ask to have more days filled in, or these will follow the same 30-word format.</div>`;
+    document.getElementById('vocabProgress').textContent = '';
+    return;
+  }
+  let learnedCount = 0;
+  grid.innerHTML = words.map((w, i) => {
+    const [word, meaning, syn, ant, example] = w;
+    const key = currentVocabDay + '-' + i;
+    const on = !!vocabLearned[key];
+    if (on) learnedCount++;
+    return `<div class="vocab-card ${on?'learned':''}">
+      <div class="vw">${word}<div class="vocab-check ${on?'on':''}" data-day="${currentVocabDay}" data-idx="${i}">${on?'✓':''}</div></div>
+      <div class="vm">${meaning}</div>
+      <div class="vs">Syn: <strong>${syn}</strong> · Ant: <strong>${ant}</strong></div>
+      <div class="ve">"${example}"</div>
+    </div>`;
+  }).join('');
+  document.getElementById('vocabProgress').textContent = `${learnedCount}/${words.length} learned`;
+  grid.querySelectorAll('.vocab-check').forEach(el => {
+    el.onclick = () => toggleVocabWord(el.dataset.day, parseInt(el.dataset.idx));
+  });
+}
+
+// ---- Grammar practice ----
+const GRAMMAR_TOPICS = [
+  { id:'pos', title:'Parts of Speech',
+    note:'Every word in a sentence functions as a noun, pronoun, verb, adjective, adverb, preposition, conjunction, or interjection. Identifying the part of speech is the base skill for every other grammar question.',
+    exercises: [
+      { q:'Identify the part of speech of "quickly" in: She finished the test quickly.', a:'Adverb — it modifies the verb "finished".' },
+      { q:'Identify the part of speech of "diligent" in: He is a diligent student.', a:'Adjective — it describes the noun "student".' },
+      { q:'Identify the part of speech of "and" in: Biology and Chemistry are tough.', a:'Conjunction — it joins two nouns.' }
+    ]
+  },
+  { id:'tenses', title:'Tenses',
+    note:'Tense shows when an action happens: present, past, or future, each with simple, continuous, perfect, and perfect continuous forms. MDCAT English often tests correct tense usage in a single sentence.',
+    exercises: [
+      { q:'Correct the tense: "She study biology every day."', a:'"She studies biology every day." (present simple, 3rd person -s)' },
+      { q:'Correct the tense: "By next month, he will completed the syllabus."', a:'"By next month, he will have completed the syllabus." (future perfect)' },
+      { q:'Correct the tense: "I am knowing the answer."', a:'"I know the answer." (stative verbs aren\'t used in continuous form)' }
+    ]
+  },
+  { id:'articles', title:'Articles & Prepositions',
+    note:'"A/an" are used for non-specific singular nouns, "the" for specific ones. Prepositions (in, on, at, by, since, for) show relationships of time, place, and direction — a common source of small but costly MCQ errors.',
+    exercises: [
+      { q:'Fill the blank: She has been studying ___ 5 AM.', a:'"since" (a specific starting point in time)' },
+      { q:'Fill the blank: He is good ___ Physics.', a:'"at" ("good at" is the correct collocation)' },
+      { q:'Fill the blank: I will see you ___ Monday.', a:'"on" (used with specific days)' }
+    ]
+  },
+  { id:'voice', title:'Active & Passive Voice',
+    note:'Active voice: subject performs the action (He solved the MCQ). Passive voice: subject receives the action (The MCQ was solved by him). MDCAT tests conversion between the two.',
+    exercises: [
+      { q:'Convert to passive: "The examiner checks the papers."', a:'"The papers are checked by the examiner."' },
+      { q:'Convert to passive: "She will complete the syllabus."', a:'"The syllabus will be completed by her."' },
+      { q:'Convert to active: "The mock test was taken by all students."', a:'"All students took the mock test."' }
+    ]
+  },
+  { id:'speech', title:'Direct & Indirect Speech',
+    note:'Direct speech quotes exact words: He said, "I am tired." Indirect speech reports them: He said that he was tired. Tense, pronouns, and time expressions shift when converting.',
+    exercises: [
+      { q:'Convert to indirect: He said, "I will study tonight."', a:'He said that he would study that night.' },
+      { q:'Convert to indirect: She said, "I have finished the chapter."', a:'She said that she had finished the chapter.' },
+      { q:'Convert to indirect: They said, "We are preparing for MDCAT."', a:'They said that they were preparing for MDCAT.' }
+    ]
+  },
+  { id:'sentence', title:'Sentence Structure & Correction',
+    note:'A correct sentence needs subject-verb agreement, parallel structure, and no dangling modifiers. Error-spotting questions usually hide one small mismatch in an otherwise normal-looking sentence.',
+    exercises: [
+      { q:'Spot the error: "Neither the teacher nor the students was ready."', a:'Should be "were ready" — verb agrees with the nearer subject "students".' },
+      { q:'Spot the error: "Each of the students have a book."', a:'Should be "has a book" — "each" is singular.' },
+      { q:'Spot the error: "Running fast, the finish line was reached."', a:'Dangling modifier — should be "Running fast, he reached the finish line."' }
+    ]
+  },
+  { id:'idioms', title:'Idioms & Phrases',
+    note:'Idioms are fixed expressions whose meaning isn\'t literal. MDCAT English sometimes tests idiom meaning or correct usage in context.',
+    exercises: [
+      { q:'What does "burn the midnight oil" mean?', a:'To study or work late into the night.' },
+      { q:'What does "a piece of cake" mean?', a:'Something very easy to do.' },
+      { q:'What does "hit the books" mean?', a:'To begin studying seriously.' }
+    ]
+  },
+  { id:'synant', title:'Synonyms, Antonyms & Analogies',
+    note:'These test vocabulary depth and relationships between words — practice pairing words with their closest match and their opposite, and spotting the logical relationship in analogy pairs.',
+    exercises: [
+      { q:'Find the odd one out: Diligent, Hardworking, Lazy, Industrious', a:'"Lazy" — the other three mean hardworking.' },
+      { q:'Complete the analogy: Doctor is to Patient as Teacher is to ___', a:'Student (professional-to-recipient relationship)' },
+      { q:'Give an antonym for "Meticulous"', a:'Careless / sloppy' }
+    ]
+  }
+];
+let grammarReviewed = {};
+let grammarOpen = new Set();
+async function loadGrammarState(){
+  try {
+    const r = await storageAPI.get('grammar-reviewed');
+    grammarReviewed = r ? JSON.parse(r.value) : {};
+  } catch(e) { grammarReviewed = {}; }
+}
+async function saveGrammarState(){
+  try { await storageAPI.set('grammar-reviewed', JSON.stringify(grammarReviewed)); } catch(e){}
+}
+function toggleGrammarReviewed(id){
+  grammarReviewed[id] = !grammarReviewed[id];
+  saveGrammarState();
+  renderGrammar();
+}
+function toggleGrammarOpen(id){
+  if (grammarOpen.has(id)) grammarOpen.delete(id); else grammarOpen.add(id);
+  renderGrammar();
+}
+function renderGrammar(){
+  const container = document.getElementById('grammarSection');
+  container.innerHTML = GRAMMAR_TOPICS.map(t => {
+    const open = grammarOpen.has(t.id);
+    const reviewed = !!grammarReviewed[t.id];
+    return `<div class="grammar-topic">
+      <div class="grammar-topic-head" data-toggle="${t.id}">
+        <h4>${t.title}</h4>
+        <span class="grammar-review-chip ${reviewed?'on':''}" data-review="${t.id}">${reviewed?'Reviewed ✓':'Mark reviewed'}</span>
+      </div>
+      <div class="grammar-body ${open?'open':''}">
+        <div class="grammar-note">${t.note}</div>
+        ${t.exercises.map((ex,i) => `
+          <div class="grammar-ex">
+            <div>${i+1}. ${ex.q}</div>
+            <button data-reveal="${t.id}-${i}">Show answer</button>
+            <div class="ans" id="ans-${t.id}-${i}">${ex.a}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  container.querySelectorAll('[data-toggle]').forEach(el => {
+    el.onclick = (e) => { if (e.target.closest('.grammar-review-chip')) return; toggleGrammarOpen(el.dataset.toggle); };
+  });
+  container.querySelectorAll('[data-review]').forEach(el => {
+    el.onclick = (e) => { e.stopPropagation(); toggleGrammarReviewed(el.dataset.review); };
+  });
+  container.querySelectorAll('[data-reveal]').forEach(el => {
+    el.onclick = () => {
+      const ansEl = document.getElementById('ans-' + el.dataset.reveal);
+      ansEl.classList.toggle('shown');
+    };
+  });
+}
+
+// ---- Printable weekly report ----
+function buildPrintReport(){
+  const rep = document.getElementById('printReport');
+  let html = `<h1 style="font-family:'Fraunces',serif;">40 Days: Ilm + Ibadat + Discipline — Weekly Report</h1>
+    <p style="color:#666;font-size:0.85rem;">Meer Mazhar Ali Khan · Generated ${new Date().toLocaleDateString()}</p>`;
+  WEEKS.forEach(week => {
+    let daysDone=0, hrs=0, mcqT=0, mcqC=0, fajrCount=0;
+    week.days.forEach(d => {
+      const s = state[dayKey(d.n)] || {};
+      if (s.done) daysDone++;
+      hrs += effectiveHours(d.n);
+      mcqT += s.mcqTotal || 0;
+      mcqC += s.mcqCorrect || 0;
+      if (s.prayers && s.prayers.Fajr) fajrCount++;
+    });
+    const wIdx = WEEKS.indexOf(week);
+    const reflection = (weekState[weekKey(wIdx)] && weekState[weekKey(wIdx)].reflection) || '(no reflection written)';
+    const acc = mcqT > 0 ? Math.round((mcqC/mcqT)*100) : 0;
+    html += `<div style="page-break-inside:avoid;margin-bottom:22px;border:1px solid #ddd;border-radius:8px;padding:14px;">
+      <h3 style="margin:0 0 6px;">${week.title} <span style="font-weight:400;color:#777;font-size:0.8rem;">(${week.sub})</span></h3>
+      <p style="font-size:0.85rem;margin:2px 0;">Days completed: ${daysDone}/${week.days.length} · Hours studied: ${Math.round(hrs*10)/10} · MCQ accuracy: ${acc}% (${mcqC}/${mcqT}) · Fajr on time: ${fajrCount}/${week.days.length}</p>
+      <p style="font-size:0.85rem;margin:6px 0 0;"><strong>Reflection:</strong> ${reflection}</p>
+    </div>`;
+  });
+  rep.innerHTML = html;
+}
+// ---- Subject-wise MCQ accuracy tracker ----
+const ACC_SUBJECTS = ['bio','chem','phy','eng'];
+let subjectStats = { bio:{total:0,correct:0}, chem:{total:0,correct:0}, phy:{total:0,correct:0}, eng:{total:0,correct:0} };
+async function loadSubjectStats(){
+  try {
+    const r = await storageAPI.get('subject-accuracy');
+    if (r) subjectStats = JSON.parse(r.value);
+  } catch(e) { /* no saved subject stats yet */ }
+}
+async function saveSubjectStats(){
+  try { await storageAPI.set('subject-accuracy', JSON.stringify(subjectStats)); } catch(e){}
+}
+function logSubjectMcq(subject, attempted, correct){
+  attempted = Math.max(0, Math.round(attempted) || 0);
+  correct = Math.max(0, Math.min(attempted, Math.round(correct) || 0));
+  if (attempted <= 0) return;
+  subjectStats[subject] = subjectStats[subject] || {total:0,correct:0};
+  subjectStats[subject].total += attempted;
+  subjectStats[subject].correct += correct;
+  saveSubjectStats();
+  renderSubjectAccuracy();
+}
+function resetSubjectStat(subject){
+  subjectStats[subject] = {total:0,correct:0};
+  saveSubjectStats();
+  renderSubjectAccuracy();
+}
+function renderSubjectAccuracy(){
+  const panel = document.getElementById('subjAccPanel');
+  const cards = ACC_SUBJECTS.map(key => {
+    const st = subjectStats[key] || {total:0,correct:0};
+    const acc = st.total > 0 ? Math.round((st.correct/st.total)*100) : null;
+    const color = SUBJECT_HEX[key];
+    return `
+    <div class="subj-acc-card" style="border-color:${color}33">
+      <div class="subj-acc-head">
+        <span class="sn" style="color:${color}">${SUBJECTS[key].label}</span>
+        <span class="sp" style="color:${color}">${acc === null ? '—' : acc + '%'}</span>
+      </div>
+      <div class="subj-acc-sub">${st.correct}/${st.total} MCQs correct</div>
+      <div class="subj-bar-track"><div class="subj-bar-fill" style="width:${acc||0}%;background:${color}"></div></div>
+      <div class="subj-acc-log">
+        <input type="number" min="0" inputmode="numeric" placeholder="Attempted" data-acc-subject="${key}" data-acc-field="attempted">
+        <input type="number" min="0" inputmode="numeric" placeholder="Correct" data-acc-subject="${key}" data-acc-field="correct">
+        <button style="background:${color}" data-acc-log="${key}">+ Log</button>
+      </div>
+    </div>`;
+  }).join('');
+  panel.innerHTML = `<h3>🎯 Subject Accuracy</h3>
+    <div class="subj-acc-empty" style="margin-bottom:10px;">Log MCQs by subject anytime — from any session, test, or mock — to build your accuracy picture.</div>
+    <div class="subj-acc-grid">${cards}</div>`;
+  panel.querySelectorAll('[data-acc-log]').forEach(btn => {
+    btn.onclick = () => {
+      const key = btn.dataset.accLog;
+      const wrap = btn.closest('.subj-acc-card');
+      const att = parseFloat(wrap.querySelector('[data-acc-field="attempted"]').value) || 0;
+      const cor = parseFloat(wrap.querySelector('[data-acc-field="correct"]').value) || 0;
+      logSubjectMcq(key, att, cor);
+    };
+  });
+}
+
+let mockTests = [];
+async function loadMockTests(){
+  try {
+    const r = await storageAPI.get('mock-tests');
+    mockTests = r ? JSON.parse(r.value) : [];
+  } catch(e) { mockTests = []; }
+}
+async function saveMockTests(){
+  try { await storageAPI.set('mock-tests', JSON.stringify(mockTests)); } catch(e){}
+}
+function addMockTest(){
+  const date = document.getElementById('mockDate').value || todayISO();
+  const score = parseFloat(document.getElementById('mockScore').value);
+  const total = parseFloat(document.getElementById('mockTotal').value) || 200;
+  const note = document.getElementById('mockNote').value.trim();
+  if (isNaN(score)) return;
+  mockTests.push({date, score, total, note});
+  mockTests.sort((a,b) => a.date.localeCompare(b.date));
+  saveMockTests();
+  document.getElementById('mockScore').value = '';
+  document.getElementById('mockNote').value = '';
+  renderMockList();
+}
+function deleteMockTest(idx){
+  mockTests.splice(idx,1);
+  saveMockTests();
+  renderMockList();
+}
+function renderMockList(){
+  const list = document.getElementById('mockList');
+  const avgEl = document.getElementById('mockAvg');
+  if (!mockTests.length) {
+    list.innerHTML = `<div class="weak-empty">No mock tests logged yet.</div>`;
+    avgEl.textContent = '';
+    return;
+  }
+  list.innerHTML = mockTests.map((m,i) => `
+    <li>
+      <span>${m.date} — ${m.score}/${m.total}${m.note ? ' · ' + m.note : ''}</span>
+      <button class="ml-del" data-idx="${i}">✕</button>
+    </li>`).join('');
+  list.querySelectorAll('.ml-del').forEach(el => {
+    el.onclick = () => deleteMockTest(parseInt(el.dataset.idx));
+  });
+  const avg = mockTests.reduce((s,m) => s + (m.score/m.total)*100, 0) / mockTests.length;
+  avgEl.textContent = `Average: ${Math.round(avg)}% across ${mockTests.length} test${mockTests.length>1?'s':''}`;
+}
+
+// ---- Mistake / Error Log — a proper reviewable list, not just counts ----
+let mistakeLog = [];
+async function loadMistakeLog(){
+  try {
+    const r = await storageAPI.get('mistake-log');
+    mistakeLog = r ? JSON.parse(r.value) : [];
+  } catch(e) { mistakeLog = []; }
+}
+async function saveMistakeLog(){
+  try { await storageAPI.set('mistake-log', JSON.stringify(mistakeLog)); } catch(e){}
+}
+function addMistakeEntry(){
+  const subject = document.getElementById('mistakeSubject').value;
+  const note = document.getElementById('mistakeNote').value.trim();
+  if (!note) return;
+  mistakeLog.unshift({ id: Date.now(), date: todayISO(), subject, note, fixed: false });
+  saveMistakeLog();
+  document.getElementById('mistakeNote').value = '';
+  renderMistakeLog();
+}
+function toggleMistakeFixed(id){
+  const item = mistakeLog.find(m => m.id === id);
+  if (item) { item.fixed = !item.fixed; saveMistakeLog(); renderMistakeLog(); }
+}
+function deleteMistakeEntry(id){
+  mistakeLog = mistakeLog.filter(m => m.id !== id);
+  saveMistakeLog();
+  renderMistakeLog();
+}
+function renderMistakeLog(){
+  const list = document.getElementById('mistakeList');
+  if (!list) return;
+  if (!mistakeLog.length) {
+    list.innerHTML = `<div class="mistake-empty">No mistakes logged yet — add one after a mock test or practice set to build a targeted revision list.</div>`;
+    return;
+  }
+  list.innerHTML = mistakeLog.map(m => `
+    <li class="${m.fixed ? 'fixed' : ''}">
+      <div class="mi-check ${m.fixed ? 'on' : ''}" data-toggle="${m.id}">${m.fixed ? '✓' : ''}</div>
+      <div class="mi-body">
+        <div class="mi-meta">
+          <span class="mi-subj" style="background:${SUBJECT_HEX[m.subject]}">${SUBJECTS[m.subject].label}</span>
+          <span class="mi-date">${m.date}</span>
+        </div>
+        <div class="mi-note">${m.note}</div>
+      </div>
+      <button class="ml-del" data-del="${m.id}">✕</button>
+    </li>`).join('');
+  list.querySelectorAll('[data-toggle]').forEach(el => {
+    el.onclick = () => toggleMistakeFixed(parseInt(el.dataset.toggle));
+  });
+  list.querySelectorAll('[data-del]').forEach(el => {
+    el.onclick = () => deleteMistakeEntry(parseInt(el.dataset.del));
+  });
+}
+
+// ---- AI Doubt Solver (calls Claude directly) ----
+async function askDoubt(){
+  const btn = document.getElementById('doubtAskBtn');
+  const input = document.getElementById('doubtInput');
+  const subjectSel = document.getElementById('doubtSubject');
+  const answerEl = document.getElementById('doubtAnswer');
+  const question = input.value.trim();
+  if (!question) return;
+
+  const subjectLabel = subjectSel.value ? SUBJECTS[subjectSel.value].label : '';
+  btn.disabled = true;
+  answerEl.innerHTML = `<div class="doubt-loading">Thinking...</div>`;
+
+  const prompt = `You are helping a student prepare for the MDCAT (Pakistan medical college admission test). ` +
+    `Explain the following ${subjectLabel ? subjectLabel + ' ' : ''}doubt in the style and depth typical of MDCAT MCQ explanations: ` +
+    `give the direct answer/concept first, then a concise exam-oriented explanation (key facts, common trap options, and a quick way to recall it). ` +
+    `Keep it focused — no long preamble.\n\nQuestion/doubt:\n${question}`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await response.json();
+    const text = (data.content || []).map(b => b.text || '').join('\n').trim();
+    answerEl.innerHTML = `<div class="doubt-answer-box">${(text || 'No answer returned — try rephrasing your question.').replace(/</g,'&lt;')}</div>`;
+  } catch(e) {
+    answerEl.innerHTML = `<div class="doubt-error">Couldn't reach the AI right now. Check your connection and try again.</div>`;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ---- Backup / restore ----
+async function backupData(){
+  const payload = { state, weekState, mockTests, syllabusState, vocabLearned, grammarReviewed, subjectStats, mistakeLog, bestStreak, rescheduleAnchor, exportedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `mdcat-tracker-backup-${todayISO()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+async function restoreData(file){
+  try {
+    const text = await file.text();
+    const payload = JSON.parse(text);
+    if (payload.state) {
+      for (const key of Object.keys(payload.state)) {
+        state[key] = payload.state[key];
+        await storageAPI.set(key, JSON.stringify(state[key]));
+      }
+    }
+    if (payload.weekState) {
+      for (const key of Object.keys(payload.weekState)) {
+        weekState[key] = payload.weekState[key];
+        await storageAPI.set(key, JSON.stringify(weekState[key]));
+      }
+    }
+    if (payload.mockTests) {
+      mockTests = payload.mockTests;
+      await saveMockTests();
+    }
+    if (payload.syllabusState) {
+      syllabusState = payload.syllabusState;
+      await saveSyllabus();
+    }
+    if (payload.vocabLearned) {
+      vocabLearned = payload.vocabLearned;
+      await saveVocab();
+    }
+    if (payload.grammarReviewed) {
+      grammarReviewed = payload.grammarReviewed;
+      await saveGrammarState();
+    }
+    if (payload.subjectStats) {
+      subjectStats = payload.subjectStats;
+      await saveSubjectStats();
+    }
+    if (payload.mistakeLog) {
+      mistakeLog = payload.mistakeLog;
+      await saveMistakeLog();
+    }
+    if (typeof payload.bestStreak === 'number') {
+      bestStreak = payload.bestStreak;
+      await saveBestStreak();
+    }
+    if (payload.rescheduleAnchor !== undefined) {
+      rescheduleAnchor = payload.rescheduleAnchor;
+      await saveRescheduleAnchor();
+    }
+    render();
+    renderMockList();
+    renderSyllabus();
+    renderVocab();
+    renderGrammar();
+    renderMistakeLog();
+    alert('Backup restored successfully.');
+  } catch(e) {
+    alert('Could not read that backup file.');
+  }
+}
+
+function todayISO(){
+  const d = new Date();
+  return d.toISOString().slice(0,10);
+}
+
+// Map day number -> actual 2026 date for "today" highlighting
+const DATE_MAP = {};
+(function buildDateMap(){
+  ALL_DAYS.forEach(d => {
+    const m = d.date.match(/(\d{2}) (\w{3})/);
+    const months = {Aug:'08', Sep:'09'};
+    const iso = '2026-' + months[m[2]] + '-' + m[1];
+    DATE_MAP[d.n] = iso;
+  });
+})();
+
+// ---- Smart Reschedule: shift remaining (not-yet-done) days forward when behind ----
+let rescheduleAnchor = null; // { day: n, newDate: 'YYYY-MM-DD' } — day n onward is re-dated from newDate
+async function loadRescheduleAnchor(){
+  try {
+    const r = await storageAPI.get('reschedule-anchor');
+    rescheduleAnchor = r ? JSON.parse(r.value) : null;
+  } catch(e) { rescheduleAnchor = null; }
+}
+async function saveRescheduleAnchor(){
+  try { await storageAPI.set('reschedule-anchor', JSON.stringify(rescheduleAnchor)); } catch(e){}
+}
+function addDaysISO(iso, days){
+  const dt = new Date(iso + 'T00:00:00');
+  dt.setDate(dt.getDate() + days);
+  return dt.toISOString().slice(0,10);
+}
+function isoToLabel(iso){
+  const dt = new Date(iso + 'T00:00:00');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const wdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  return `${String(dt.getDate()).padStart(2,'0')} ${months[dt.getMonth()]} (${wdays[dt.getDay()]})`;
+}
+function effectiveDateISO(n){
+  if (rescheduleAnchor && n >= rescheduleAnchor.day) return addDaysISO(rescheduleAnchor.newDate, n - rescheduleAnchor.day);
+  return DATE_MAP[n];
+}
+function effectiveDateLabel(n){
+  if (rescheduleAnchor && n >= rescheduleAnchor.day) return isoToLabel(effectiveDateISO(n));
+  const d = ALL_DAYS.find(x => x.n === n);
+  return d ? d.date : '';
+}
+function smartReschedule(){
+  const nextPending = ALL_DAYS.find(d => !(state[dayKey(d.n)] && state[dayKey(d.n)].done));
+  if (!nextPending) { alert('All 40 days are already marked done — nothing to reschedule!'); return; }
+  const today = todayISO();
+  if (effectiveDateISO(nextPending.n) === today) { alert('You\'re already on schedule for today — no reschedule needed.'); return; }
+  rescheduleAnchor = { day: nextPending.n, newDate: today };
+  saveRescheduleAnchor();
+  render();
+  alert(`Rescheduled — Day ${nextPending.n} onward now starts today (${isoToLabel(today)}). Earlier days keep their original dates as your record.`);
+}
+function cancelReschedule(){
+  if (!rescheduleAnchor) return;
+  if (!confirm('Revert to the original plan dates?')) return;
+  rescheduleAnchor = null;
+  saveRescheduleAnchor();
+  render();
+}
+
+async function loadState(){
+  try {
+    const res = await storageAPI.list('day-');
+    if (res && res.keys) {
+      for (const k of res.keys) {
+        try {
+          const item = await storageAPI.get(k);
+          if (item) state[k] = JSON.parse(item.value);
+        } catch(e) {}
+      }
+    }
+  } catch(e) { /* no saved state yet */ }
+  try {
+    const resW = await storageAPI.list('week-');
+    if (resW && resW.keys) {
+      for (const k of resW.keys) {
+        try {
+          const item = await storageAPI.get(k);
+          if (item) weekState[k] = JSON.parse(item.value);
+        } catch(e) {}
+      }
+    }
+  } catch(e) { /* no saved reflections yet */ }
+  render();
+}
+
+async function saveDay(n){
+  const key = dayKey(n);
+  try {
+    await storageAPI.set(key, JSON.stringify(state[key] || {}));
+  } catch(e) { console.error('save failed', e); }
+}
+
+function toggleDone(n){
+  const key = dayKey(n);
+  state[key] = state[key] || {};
+  state[key].done = !state[key].done;
+  saveDay(n);
+  render();
+}
+function updateStat(n, field, value){
+  const key = dayKey(n);
+  state[key] = state[key] || {};
+  const num = value === '' ? undefined : Math.max(0, parseFloat(value));
+  state[key][field] = isNaN(num) ? undefined : num;
+  saveDay(n);
+  render();
+}
+
+function toggleTimer(n){
+  const key = dayKey(n);
+  state[key] = state[key] || {};
+  if (state[key].timerStart) {
+    // stop: fold elapsed time into hours
+    const elapsedHrs = (Date.now() - state[key].timerStart) / 3600000;
+    state[key].hours = Math.round(((state[key].hours || 0) + elapsedHrs) * 100) / 100;
+    delete state[key].timerStart;
+  } else {
+    state[key].timerStart = Date.now();
+  }
+  saveDay(n);
+  render();
+}
+
+function formatElapsed(ms){
+  const totalSec = Math.floor(ms/1000);
+  const h = String(Math.floor(totalSec/3600)).padStart(2,'0');
+  const m = String(Math.floor((totalSec%3600)/60)).padStart(2,'0');
+  const s = String(totalSec%60).padStart(2,'0');
+  return `${h}:${m}:${s}`;
+}
+
+function tickTimers(){
+  document.querySelectorAll('[data-timer-n]').forEach(el => {
+    const n = parseInt(el.dataset.timerN);
+    const s = state[dayKey(n)];
+    if (s && s.timerStart) {
+      el.textContent = formatElapsed(Date.now() - s.timerStart);
+    }
+  });
+  document.querySelectorAll('[data-block-timer-n]').forEach(el => {
+    const n = parseInt(el.dataset.blockTimerN);
+    const key = el.dataset.blockTimerKey;
+    const s = state[dayKey(n)];
+    const b = s && s.blocks && s.blocks[key];
+    if (b && b.timerStart) {
+      el.textContent = formatElapsed(Date.now() - b.timerStart);
+    }
+  });
+  updateExamClock();
+}
+setInterval(tickTimers, 1000);
+
+function updateExamClock(){
+  const el = document.getElementById('examClock');
+  if (!el) return;
+  const exam = new Date('2026-09-20T00:00:00');
+  const diff = exam - new Date();
+  if (diff <= 0) { el.textContent = 'Exam day is here'; return; }
+  const totalSec = Math.floor(diff/1000);
+  const d = Math.floor(totalSec/86400);
+  const h = String(Math.floor((totalSec%86400)/3600)).padStart(2,'0');
+  const m = String(Math.floor((totalSec%3600)/60)).padStart(2,'0');
+  const s = String(totalSec%60).padStart(2,'0');
+  el.textContent = `${d}d ${h}:${m}:${s}`;
+}
+
+async function resetAll(){
+  if (!confirm('Reset all 40 days of progress? This cannot be undone.')) return;
+  for (const d of ALL_DAYS) {
+    const key = dayKey(d.n);
+    state[key] = {};
+    try { await storageAPI.set(key, JSON.stringify({})); } catch(e) {}
+  }
+  render();
+}
+
+function computeStreak(){
+  let streak = 0;
+  for (const d of ALL_DAYS) {
+    const s = state[dayKey(d.n)];
+    if (s && s.done) streak++;
+    else break;
+  }
+  return streak;
+}
+
+// ---- Best streak ever (persists even after a streak breaks) ----
+let bestStreak = 0;
+async function loadBestStreak(){
+  try {
+    const r = await storageAPI.get('best-streak');
+    bestStreak = r ? (parseInt(JSON.parse(r.value)) || 0) : 0;
+  } catch(e) { bestStreak = 0; }
+}
+async function saveBestStreak(){
+  try { await storageAPI.set('best-streak', JSON.stringify(bestStreak)); } catch(e){}
+}
+function updateBestStreak(current){
+  if (current > bestStreak) {
+    bestStreak = current;
+    saveBestStreak();
+  }
+}
+
+function computeFajrStreak(){
+  let streak = 0;
+  for (const d of ALL_DAYS) {
+    const s = state[dayKey(d.n)];
+    if (s && s.prayers && s.prayers.Fajr) streak++;
+    else break;
+  }
+  return streak;
+}
+
+function render(){
+  // countdown
+  const today = new Date(todayISO());
+  const exam = new Date('2026-09-20');
+  const diff = Math.ceil((exam - today) / (1000*60*60*24));
+  const daysLeft = diff >= 0 ? diff : 0;
+  document.getElementById('daysLeft').textContent = daysLeft;
+
+  const doneCount = ALL_DAYS.filter(d => state[dayKey(d.n)] && state[dayKey(d.n)].done).length;
+  document.getElementById('daysDone').textContent = doneCount + '/40';
+  const streakNow = computeStreak();
+  document.getElementById('streak').textContent = streakNow;
+  updateBestStreak(streakNow);
+  const bestStreakEl = document.getElementById('bestStreak');
+  if (bestStreakEl) bestStreakEl.textContent = bestStreak;
+  const pct = Math.round((doneCount/40)*100);
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  const cancelBtn = document.getElementById('cancelRescheduleBtn');
+  if (cancelBtn) cancelBtn.style.display = rescheduleAnchor ? '' : 'none';
+
+  renderInspiration();
+  renderMilestone(daysLeft, doneCount);
+  renderWeakTopics();
+  renderChart();
+  renderPie();
+  const currentStreak = computeStreak();
+  const fajrStreak = computeFajrStreak();
+  renderBadges(doneCount, currentStreak);
+  updateExamClock();
+  document.getElementById('fajrStreak').textContent = fajrStreak;
+  renderMiniCal();
+  renderSubjectCompletion();
+  renderSubjectAccuracy();
+  renderShareText(daysLeft, doneCount, currentStreak, fajrStreak);
+
+  const daysElapsedInPlan = Math.min(40, Math.max(0, planDayIndex()));
+  const hoursLeft = (40 - daysElapsedInPlan) * 12.5;
+  document.getElementById('hoursLeft').textContent = hoursLeft;
+
+  // subject tally
+  const tallyEl = document.getElementById('subjectTally');
+  tallyEl.innerHTML = '';
+  Object.keys(SUBJECTS).forEach(key => {
+    const total = ALL_DAYS.filter(d => d.type === key).length;
+    if (!total) return;
+    const done = ALL_DAYS.filter(d => d.type === key && state[dayKey(d.n)] && state[dayKey(d.n)].done).length;
+    const span = document.createElement('span');
+    span.style.background = `var(--${key}-bg)`;
+    span.style.color = SUBJECTS[key].color;
+    span.textContent = `${SUBJECTS[key].label}: ${done}/${total}`;
+    tallyEl.appendChild(span);
+  });
+
+  // legend (filter buttons)
+  const legendEl = document.getElementById('legend');
+  if (!legendEl.dataset.built) {
+    legendEl.innerHTML = '';
+    Object.keys(SUBJECTS).forEach(key => {
+      const btn = document.createElement('button');
+      btn.className = 'active';
+      btn.style.background = `var(--${key}-bg)`;
+      btn.style.color = SUBJECTS[key].color;
+      btn.style.borderColor = activeFilter === key ? SUBJECTS[key].color : 'transparent';
+      btn.innerHTML = `<i class="dot" style="background:var(--${key})"></i>${SUBJECTS[key].label}`;
+      btn.onclick = () => {
+        activeFilter = activeFilter === key ? null : key;
+        renderWeeks();
+        Array.from(legendEl.children).forEach(c => c.classList.remove('active'));
+        legendEl.querySelectorAll('button').forEach(b => {
+          b.classList.toggle('active', !activeFilter || b === btn && activeFilter);
+        });
+        legendEl.querySelectorAll('button').forEach((b,i) => {
+          const k = Object.keys(SUBJECTS)[i];
+          b.style.borderColor = activeFilter === k ? SUBJECTS[k].color : 'transparent';
+          b.style.opacity = (!activeFilter || activeFilter === k) ? '1' : '0.4';
+        });
+      };
+      legendEl.appendChild(btn);
+    });
+    legendEl.dataset.built = '1';
+  }
+
+  renderDashboard();
+  renderWeeks();
+}
+
+function renderDashboard(){
+  const todayStr = todayISO();
+  let mcqTotal=0, mcqCorrect=0;
+  let hoursTotal=0, hoursDaysComplete=0, hoursDaysMissed=0;
+  let mistakesLogged=0, mistakesFixed=0;
+
+  ALL_DAYS.forEach(d => {
+    const s = state[dayKey(d.n)] || {};
+    mcqTotal += s.mcqTotal || 0;
+    mcqCorrect += s.mcqCorrect || 0;
+    hoursTotal += s.hours || 0;
+    mistakesLogged += s.mistakesLogged || 0;
+    mistakesFixed += s.mistakesFixed || 0;
+
+    const hasPassed = effectiveDateISO(d.n) <= todayStr;
+    if (s.hours && s.hours > 0) hoursDaysComplete++;
+    else if (hasPassed) hoursDaysMissed++;
+  });
+
+  const mcqWrong = Math.max(0, mcqTotal - mcqCorrect);
+  const mcqAcc = mcqTotal > 0 ? Math.round((mcqCorrect/mcqTotal)*100) : 0;
+  const mistakesRemaining = Math.max(0, mistakesLogged - mistakesFixed);
+
+  document.getElementById('mcqPanel').innerHTML = `
+    <h3>📝 MCQs Accuracy</h3>
+    <div class="dash-row"><span class="k">Total attempted</span><span class="v">${mcqTotal}</span></div>
+    <div class="dash-row"><span class="k">Correct</span><span class="v">${mcqCorrect}</span></div>
+    <div class="dash-row"><span class="k">Wrong</span><span class="v">${mcqWrong}</span></div>
+    <div class="dash-row big accent"><span class="k">Accuracy</span><span class="v">${mcqAcc}%</span></div>
+  `;
+  document.getElementById('hoursPanel').innerHTML = `
+    <h3>⏱️ Study Hours</h3>
+    <div class="dash-row"><span class="k">Total hours logged</span><span class="v">${hoursTotal}</span></div>
+    <div class="dash-row"><span class="k">Days complete</span><span class="v">${hoursDaysComplete}</span></div>
+    <div class="dash-row big accent"><span class="k">Days missed</span><span class="v">${hoursDaysMissed}</span></div>
+  `;
+  document.getElementById('mistakesPanel').innerHTML = `
+    <h3>🧩 Mistakes</h3>
+    <div class="dash-row"><span class="k">Total logged</span><span class="v">${mistakesLogged}</span></div>
+    <div class="dash-row"><span class="k">Fixed</span><span class="v">${mistakesFixed}</span></div>
+    <div class="dash-row big accent"><span class="k">Remaining</span><span class="v">${mistakesRemaining}</span></div>
+  `;
+
+  const tbody = document.getElementById('chapterTableBody');
+  tbody.innerHTML = ALL_DAYS.map(d => {
+    const s = state[dayKey(d.n)] || {};
+    const att = s.mcqTotal ?? '';
+    const cor = s.mcqCorrect ?? '';
+    const acc = (s.mcqTotal > 0) ? Math.round(((s.mcqCorrect||0)/s.mcqTotal)*100) : null;
+    return `<tr>
+      <td>Day ${d.n}</td>
+      <td><span class="badge" style="background:var(--${d.type});color:#fff;">${SUBJECTS[d.type].label}</span> ${d.topic}</td>
+      <td><input type="number" min="0" inputmode="numeric" data-n="${d.n}" data-field="mcqTotal" value="${att}"></td>
+      <td><input type="number" min="0" inputmode="numeric" data-n="${d.n}" data-field="mcqCorrect" value="${cor}"></td>
+      <td>${acc !== null ? acc + '%' : '—'}</td>
+    </tr>`;
+  }).join('');
+  tbody.querySelectorAll('input').forEach(el => {
+    el.onchange = () => updateStat(parseInt(el.dataset.n), el.dataset.field, el.value);
+  });
+}
+
+function renderWeeks(){
+  const container = document.getElementById('weeksContainer');
+  container.innerHTML = '';
+  const todayStr = todayISO();
+
+  WEEKS.forEach(week => {
+    const wt = document.createElement('div');
+    wt.className = 'week-title';
+    wt.textContent = week.title;
+    container.appendChild(wt);
+
+    const ws = document.createElement('div');
+    ws.className = 'week-sub';
+    ws.textContent = week.sub;
+    container.appendChild(ws);
+
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+
+    week.days.forEach(d => {
+      const s = state[dayKey(d.n)] || {};
+      const card = document.createElement('div');
+      card.className = `card ${d.type}` + (s.done ? ' checked' : '') + (effectiveDateISO(d.n) === todayStr ? ' today' : '');
+      if (activeFilter && d.type !== activeFilter) card.classList.add('hidden');
+
+      card.innerHTML = `
+        <div class="toprow">
+          <div>
+            <div class="daynum">Day ${d.n}</div>
+            <div class="date">${effectiveDateLabel(d.n)}${rescheduleAnchor && d.n >= rescheduleAnchor.day ? ' <span class="resched-tag">rescheduled</span>' : ''}</div>
+          </div>
+          <div class="check-main ${s.done ? 'on' : ''}" data-n="${d.n}">${s.done ? '✓' : ''}</div>
+        </div>
+        <span class="badge">${SUBJECTS[d.type].label}</span>
+        <div class="topics">${d.topic}</div>
+        ${d.extra ? `<div class="extra">${d.extra}</div>` : ''}
+        <div class="timer-row">
+          <button class="timer-btn ${s.timerStart ? 'running' : ''}" data-n="${d.n}">${s.timerStart ? '⏸ Stop & Log' : '▶ Start Study'}</button>
+          <span class="timer-display" data-timer-n="${d.n}">${s.timerStart ? formatElapsed(Date.now()-s.timerStart) : ''}</span>
+        </div>
+        <div class="stats">
+          <div class="stats-grid">
+            <div class="stat-field"><label>MCQs Att.</label><input type="number" min="0" inputmode="numeric" data-n="${d.n}" data-field="mcqTotal" value="${s.mcqTotal ?? ''}"></div>
+            <div class="stat-field"><label>Correct</label><input type="number" min="0" inputmode="numeric" data-n="${d.n}" data-field="mcqCorrect" value="${s.mcqCorrect ?? ''}"></div>
+            <div class="stat-field"><label>Hours</label><input type="number" min="0" step="0.5" inputmode="decimal" data-n="${d.n}" data-field="hours" value="${s.hours ?? ''}"></div>
+          </div>
+          <div class="stats-grid" style="grid-template-columns:1fr 1fr;">
+            <div class="stat-field"><label>Mistakes logged</label><input type="number" min="0" inputmode="numeric" data-n="${d.n}" data-field="mistakesLogged" value="${s.mistakesLogged ?? ''}"></div>
+            <div class="stat-field"><label>Mistakes fixed</label><input type="number" min="0" inputmode="numeric" data-n="${d.n}" data-field="mistakesFixed" value="${s.mistakesFixed ?? ''}"></div>
+          </div>
+          ${(s.mcqTotal > 0) ? `<div class="day-accuracy">Accuracy: ${Math.round(((s.mcqCorrect||0)/s.mcqTotal)*100)}%</div>` : ''}
+        </div>
+        <div class="deen-row">
+          <div class="deen-row-label">🕌 Namaz</div>
+          <div class="prayer-chips">
+            ${['Fajr','Zuhr','Asr','Maghrib','Isha'].map(p => `<span class="prayer-chip ${(s.prayers && s.prayers[p]) ? 'on':''}" data-n="${d.n}" data-prayer="${p}">${p}</span>`).join('')}
+          </div>
+          <span class="quran-chip ${s.quranDua ? 'on':''}" data-n="${d.n}">📖 Qur'an / du'a (10–15 min)</span>
+        </div>
+        <div class="extras-row">
+          <div class="mood-group">
+            <span class="mood-btn ${s.mood==='tired'?'on':''}" data-n="${d.n}" data-mood="tired" title="Tired">😴</span>
+            <span class="mood-btn ${s.mood==='okay'?'on':''}" data-n="${d.n}" data-mood="okay" title="Okay">😐</span>
+            <span class="mood-btn ${s.mood==='energized'?'on':''}" data-n="${d.n}" data-mood="energized" title="Energized">⚡</span>
+          </div>
+          <div class="mini-field">Sleep <input type="number" min="0" max="12" step="0.5" data-n="${d.n}" data-extra="sleepHours" value="${s.sleepHours ?? ''}">h</div>
+          <div class="mini-field">Water
+            <div class="water-dots">
+              ${[1,2,3,4,5,6,7,8].map(i => `<span class="water-dot ${((s.water||0) >= i) ? 'on':''}" data-n="${d.n}" data-count="${i}"></span>`).join('')}
+            </div>
+          </div>
+        </div>
+        <button class="timelog-toggle" data-n="${d.n}">🕐 Time-of-day log ${openTimelogs.has(d.n) ? '▴' : '▾'} (${blocksSubtotal(d.n)}/12.5 hrs)</button>
+        <div class="timelog ${openTimelogs.has(d.n) ? 'open' : ''}">
+          ${TIME_BLOCKS.map(tb => {
+            const b = getBlock(d.n, tb.key);
+            return `
+            <div class="timelog-block">
+              <div class="tb-head">
+                <span class="tb-time">${tb.label} · ${tb.time}</span>
+                <span class="tb-target">target ${tb.target}h</span>
+              </div>
+              <div class="block-timer-row">
+                <button class="block-timer-btn ${b.timerStart ? 'running' : ''}" data-n="${d.n}" data-block="${tb.key}">${b.timerStart ? '⏸ Stop' : '▶ Start'}</button>
+                <span class="block-timer-display" data-block-timer-n="${d.n}" data-block-timer-key="${tb.key}">${b.timerStart ? formatElapsed(Date.now()-b.timerStart) : ''}</span>
+              </div>
+              <div class="timelog-row">
+                <input type="number" class="timelog-hours" min="0" step="0.25" placeholder="hrs" data-n="${d.n}" data-block="${tb.key}" value="${b.hours}">
+                <input type="text" class="timelog-book" placeholder="Book / topic" data-n="${d.n}" data-block="${tb.key}" value="${(b.book||'').replace(/"/g,'&quot;')}">
+              </div>
+              <div class="timelog-tags">
+                ${TIMELOG_TAGS.map(t => `<span class="timelog-tag ${b.tags.includes(t)?'on':''}" data-n="${d.n}" data-block="${tb.key}" data-tag="${t}">${t}</span>`).join('')}
+              </div>
+            </div>`;
+          }).join('')}
+          <div class="timelog-subtotal">Logged: ${blocksSubtotal(d.n)} / 12.5 hrs</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    container.appendChild(grid);
+
+    const weekIdx = WEEKS.indexOf(week);
+    const wReflection = (weekState[weekKey(weekIdx)] && weekState[weekKey(weekIdx)].reflection) || '';
+    const rBox = document.createElement('div');
+    rBox.className = 'reflection-box';
+    rBox.innerHTML = `<h4>📝 Week reflection — what went well, what to fix</h4>
+      <textarea data-week="${weekIdx}" placeholder="e.g. Chemistry MCQs weak, need more practice next week...">${wReflection}</textarea>`;
+    container.appendChild(rBox);
+  });
+
+  container.querySelectorAll('.reflection-box textarea').forEach(el => {
+    el.onchange = () => saveWeekReflection(parseInt(el.dataset.week), el.value);
+  });
+
+  container.querySelectorAll('.check-main').forEach(el => {
+    el.onclick = () => toggleDone(parseInt(el.dataset.n));
+  });
+  container.querySelectorAll('.timer-btn').forEach(el => {
+    el.onclick = (e) => { e.stopPropagation(); toggleTimer(parseInt(el.dataset.n)); };
+  });
+  container.querySelectorAll('.stat-field input').forEach(el => {
+    el.onchange = () => updateStat(parseInt(el.dataset.n), el.dataset.field, el.value);
+    el.onclick = (e) => e.stopPropagation();
+  });
+  container.querySelectorAll('.timelog-toggle').forEach(el => {
+    el.onclick = (e) => { e.stopPropagation(); toggleTimelogPanel(parseInt(el.dataset.n)); };
+  });
+  container.querySelectorAll('.timelog-hours').forEach(el => {
+    el.onchange = () => updateBlockField(parseInt(el.dataset.n), el.dataset.block, 'hours', el.value);
+    el.onclick = (e) => e.stopPropagation();
+  });
+  container.querySelectorAll('.timelog-book').forEach(el => {
+    el.onchange = () => updateBlockField(parseInt(el.dataset.n), el.dataset.block, 'book', el.value);
+    el.onclick = (e) => e.stopPropagation();
+  });
+  container.querySelectorAll('.timelog-tag').forEach(el => {
+    el.onclick = (e) => { e.stopPropagation(); toggleBlockTag(parseInt(el.dataset.n), el.dataset.block, el.dataset.tag); };
+  });
+  container.querySelectorAll('.block-timer-btn').forEach(el => {
+    el.onclick = (e) => { e.stopPropagation(); toggleBlockTimer(parseInt(el.dataset.n), el.dataset.block); };
+  });
+  container.querySelectorAll('.mood-btn').forEach(el => {
+    el.onclick = (e) => { e.stopPropagation(); setMood(parseInt(el.dataset.n), el.dataset.mood); };
+  });
+  container.querySelectorAll('[data-extra]').forEach(el => {
+    el.onchange = () => updateExtra(parseInt(el.dataset.n), el.dataset.extra, el.value);
+    el.onclick = (e) => e.stopPropagation();
+  });
+  container.querySelectorAll('.water-dot').forEach(el => {
+    el.onclick = (e) => { e.stopPropagation(); setWater(parseInt(el.dataset.n), parseInt(el.dataset.count)); };
+  });
+  container.querySelectorAll('.prayer-chip').forEach(el => {
+    el.onclick = (e) => { e.stopPropagation(); togglePrayer(parseInt(el.dataset.n), el.dataset.prayer); };
+  });
+  container.querySelectorAll('.quran-chip').forEach(el => {
+    el.onclick = (e) => { e.stopPropagation(); toggleQuranDua(parseInt(el.dataset.n)); };
+  });
+}
+
+document.getElementById('resetBtn').onclick = resetAll;
+document.getElementById('backupBtn').onclick = backupData;
+document.getElementById('restoreFile').onchange = (e) => {
+  if (e.target.files && e.target.files[0]) restoreData(e.target.files[0]);
+  e.target.value = '';
+};
+document.getElementById('mockAddBtn').onclick = addMockTest;
+document.getElementById('mockDate').value = todayISO();
+document.getElementById('mistakeAddBtn').onclick = addMistakeEntry;
+document.getElementById('doubtAskBtn').onclick = askDoubt;
+document.getElementById('printBtn').onclick = () => { buildPrintReport(); window.print(); };
+document.getElementById('rescheduleBtn').onclick = smartReschedule;
+document.getElementById('cancelRescheduleBtn').onclick = cancelReschedule;
+document.getElementById('shareCopyBtn').onclick = () => {
+  const ta = document.getElementById('shareText');
+  ta.select();
+  try {
+    navigator.clipboard.writeText(ta.value);
+  } catch(e) {
+    document.execCommand('copy');
+  }
+  const btn = document.getElementById('shareCopyBtn');
+  const orig = btn.textContent;
+  btn.textContent = 'Copied ✓';
+  setTimeout(() => { btn.textContent = orig; }, 1500);
+};
+
+loadState();
+loadRescheduleAnchor().then(render);
+loadSubjectStats().then(renderSubjectAccuracy);
+loadMockTests().then(renderMockList);
+loadSyllabus().then(renderSyllabus);
+loadVocab().then(() => { initVocabSelect(); renderVocab(); });
+loadGrammarState().then(renderGrammar);
+loadMistakeLog().then(renderMistakeLog);
+loadBestStreak();
+
+</script>
+
+</body>
+</html>
